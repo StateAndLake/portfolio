@@ -1,5 +1,6 @@
 ---
-title: "Elizabeth Miller Urban Planning Portfolio"
+title: "Elizabeth Miller"
+subtitle: "Urban Planning Portfolio"
 image: EMillerHeadshot2023.jpg
 resources: ElizabethMiller_2024_resume_1_28.pdf
 about:
