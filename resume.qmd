@@ -1,10 +1,21 @@
 ---
 title: 'Resume'
+about:
+  template: trestles
+  image-shape: round
+  image-width: 15em
+  links:
+    - text: "elizabethelainemiller98@gmail.com"
+      icon: envelope
+      href: mailto:elizabethelainemiller98@gmail.com
+    - text: "828-702-8443"
+      icon: telephone
+    - text: GitHub
+      icon: github
+      href: https://github.com/emiller1031
+    - text: "Chicago, IL"
+      icon: geo-alt-fill
 ---
-
-|                                    |                  |                                  |
-|------------------------------------|------------------|----------------------------------|
-| elizabethelainemiller98\@gmail.com | \(828\) 702-8443 | <https://github.com/emiller1031> |
 
 # Work Experience
 
