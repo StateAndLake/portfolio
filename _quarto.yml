@@ -11,9 +11,10 @@ website:
       - href: index.qmd
         text: Home
       - resume.qmd
-      - text: "Mapping and Data Visualization"
+      - text: "Mapping and Data Analysis"
         menu: 
           - upp462.qmd
+          - finalproj.Rmd
       - text: "Animation"
         menu: 
           - urbanrenewal.qmd
