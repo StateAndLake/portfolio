@@ -40,5 +40,26 @@
     "title": "Visualizing Urban Renewal",
     "section": "New Nicollet Redevelopment",
     "text": "New Nicollet Redevelopment\nAs part of the American Planning Association 2024 Student Planning and Design Competition, I developed a GIF of aerial imagery over time of the project site: a former Kmart in Minneapolis, Minnesota along Lake Street and Nicollet Avenue. The construction of this KMart required the closure of Nicollet Avenue at Lake Street to accommodate the building and its parking lot, cutting off the area south of Lake Street from an important corridor.\nThe City of Minneapolis approved the termination of the Kmart lease in 2020 with the goal of reconnecting Nicollet. This GIF illustrates how disruptive both the construction of Interstate 35W and the development of the Kmart was to the urban tissue of the neighborhood.\nView more of my work on this project here.\n\nThis GIF was produced in Photoshop using a combination of historic aerial imagery from the Metropolitan Council and images from Google Earth."
+  },
+  {
+    "objectID": "upp462.html",
+    "href": "upp462.html",
+    "title": "GIS Approach to Site Selection for Affordable Housing",
+    "section": "",
+    "text": "This project was completed in Fall of 2023 for an intermediate GIS course. I undertook this project in a group, but I developed the project methods, produced the flowchart using Illustrator, and was responsible for 50% of the write-up, data analysis, and StoryMap. I have included the final map on this site using RShiny, but the StoryMap can be viewed here."
+  },
+  {
+    "objectID": "upp462.html#introduction",
+    "href": "upp462.html#introduction",
+    "title": "GIS Approach to Site Selection for Affordable Housing",
+    "section": "Introduction",
+    "text": "Introduction\nLike most resources and assets in Chicago, there are spatial patterns underlying the distribution of naturally occurring affordable housing and stock intentionally created to be “affordable” in the city. As the demand for affordable housing continues to outweigh Chicago’s supply, we are interested in analyzing the various factors that could help highlight areas prime for new developments.\nOur research and analysis focus on the development of a tool that allows for a more comprehensive view of suitable sites for the development of affordable housing across Chicago. We recognize that in addition to other similar assets across the city often associated with certain socioeconomic factors, there are often underlying spatial patterns that guide where and why affordable housing developments are physically manifested.\nWe are not so much interested in the natural distribution of affordable housing across Chicago as we are in creating a set of standards that outline where such developments could appropriately be built in the future. Since we know that the demand for affordable housing in Chicago is ever-growing, we recognize the need for a more detailed view of suitable sites, even those that may have been previously ignored. Using several tools and methods in GIS, we have created an interactive tool that allows one to view the appropriate sites across the city and the various factors that make them such according to our metrics."
+  },
+  {
+    "objectID": "upp462.html#methods",
+    "href": "upp462.html#methods",
+    "title": "GIS Approach to Site Selection for Affordable Housing",
+    "section": "Methods",
+    "text": "Methods"
   }
 ]

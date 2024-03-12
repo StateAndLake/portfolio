@@ -1,5 +1,6 @@
 ---
-title: "GIS Approach to Site Selection for Affordable Housing"
+title: "siteselection"
+server: shiny
 ---
 
 *This project was completed in Fall of 2023 for an intermediate GIS course. I undertook this project in a group, but I developed the project methods, produced the flowchart using Illustrator, and was responsible for 50% of the write-up, data analysis, and StoryMap. I have included the final map on this site using RShiny, but [the StoryMap can be viewed here](https://storymaps.arcgis.com/stories/932381da2b374fb4afcdc0be675b981d).*
