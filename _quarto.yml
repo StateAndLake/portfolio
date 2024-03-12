@@ -5,6 +5,7 @@ project:
 website:
   title: "Elizabeth Miller"
   navbar:
+    search: true
     background: secondary
     left:
       - href: index.qmd
