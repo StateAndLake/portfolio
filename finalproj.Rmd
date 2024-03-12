@@ -1,6 +1,6 @@
 ---
-title: "Anticipating Climate Migration: Housing Density, Water Resources, and Water Hazards in Cook County, Illinois"
-author: "Elizabeth Miller and Mackenzie Hayes"
+title: "Anticipating Climate Migration: Housing Density and Water Resources, and Water Hazards in Cook County, Illinois"
+author: "Elizabeth Miller"
 date: "`r Sys.Date()`"
 output: 
   html_document:
