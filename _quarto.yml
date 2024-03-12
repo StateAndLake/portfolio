@@ -27,7 +27,7 @@ website:
 format:
   html:
     theme: lux
-    mainfont: roboto
+    mainfont: "Helvetica"
     fontsize: 1.1em
     fontcolor: "#181616"
     linkcolor: "#C23B27"
