@@ -8,10 +8,15 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - resume.qmd
 
 format:
   html:
-    theme: cosmo
+    theme: lux
+    mainfont: roboto
+    fontsize: 1.1em
+    fontcolor: "#231F20"
+    linkcolor: "#C23B27"
     css: styles.css
     toc: true
 
