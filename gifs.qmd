@@ -1,3 +1,33 @@
 ---
 title: "Digital Art"
 ---
+
+*In a past life, I dabbled in digital art. I developed these GIFs in Photoshop during the spring of 2020 for a digital art course at Davidson College. The task involved creating frame by frame animations inspired by fictitious art works described in [The Ambrose J. and Vivian T. Seagrave Museum of 20th Century American Art by Matthew Kirkpatrick](https://www.amazon.com/dp/B07VGYWN64/ref=docs-os-doi_0). I am the sole creator of these GIFs.*
+
+![](images/millerelizabeth_01photoshop_gif1.gif)
+
+An artist drowns in paint.
+
+------------------------------------------------------------------------
+
+![](images/millerelizabeth_01photoshopgifs_gif6.gif)
+
+Hearts beat in a bowl of fruit.
+
+------------------------------------------------------------------------
+
+![](images/millerelizabeth_01photoshop_gif2.4.gif)
+
+An elaborate dollhouse conceals a nasty secret.
+
+------------------------------------------------------------------------
+
+![](images/millerelizabeth_01photoshop_gif5.gif)
+
+A performance artist sets a dumpster ablaze.
+
+------------------------------------------------------------------------
+
+![](images/millerelizabeth_02photoshop.gif)
+
+Bonus: this was the first GIF I made, inspired by a photo collage I made of pictures taken on my study abroad program to Buenos Aires, Barcelona, and Cape Town.
