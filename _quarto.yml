@@ -8,7 +8,6 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
       - resume.qmd
 
 format:
@@ -16,7 +15,7 @@ format:
     theme: lux
     mainfont: roboto
     fontsize: 1.1em
-    fontcolor: "#231F20"
+    fontcolor: "#181616"
     linkcolor: "#C23B27"
     css: styles.css
     toc: true
