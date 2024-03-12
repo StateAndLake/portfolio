@@ -4,7 +4,7 @@ author: "Elizabeth Miller and Mackenzie Hayes"
 date: "`r Sys.Date()`"
 output: 
   html_document:
-    theme: lux
+    theme: journal
     toc: true
     toc_float: true
     code_folding: hide 
