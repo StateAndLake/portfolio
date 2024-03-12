@@ -20,7 +20,7 @@ about:
   id: ppc
 ---
 
-I am a Chicago-based urban planner with an interest in the role of public space and play in climate change adaptation. I believe our cities and towns can not only be more inclusive, accessible, and climate-resilient, but also more fun for everyone, and I am passionate about the role of zoning and land use in achieving these outcomes.
+I am a Chicago-based urban planner with an interest in the role of public space and play in climate change adaptation. I believe our cities and towns can not only be more inclusive, accessible, and climate-resilient, but also more fun for everyone, and I am passionate about the potential of zoning and land use reform to achieve these outcomes.
 
 I will graduate from the University of Illinois Chicago's Master of Urban Planning and Policy program in May 2024, and I am seeking professional opportunities relating to civic technology, GIS, and data visualization.
 
