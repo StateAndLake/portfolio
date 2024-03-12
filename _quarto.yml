@@ -5,10 +5,22 @@ project:
 website:
   title: "Elizabeth Miller"
   navbar:
+    background: secondary
     left:
       - href: index.qmd
         text: Home
       - resume.qmd
+      - text: "Mapping and Data Visualization"
+        menu: 
+          - collages.qmd
+      - text: "Animation"
+        menu: 
+          - urbanrenewal.qmd
+          - gifs.qmd
+      - text: "Urban Design"
+        menu:
+          - nicollet.qmd
+          - imd.qmd
 
 format:
   html:
