@@ -6,7 +6,7 @@ website:
   title: "Elizabeth Miller"
   navbar:
     search: true
-    background: secondary
+    background: "#C23B27"
     left:
       - href: index.qmd
         text: Home
