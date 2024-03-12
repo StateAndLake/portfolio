@@ -1,7 +1,7 @@
 ---
 title: 'Resume'
 about:
-  template: trestles
+  template: marquee
   image-shape: round
   image-width: 15em
   links:
