@@ -14,9 +14,9 @@ about:
     - text: GitHub
       icon: github
       href: https://github.com/emiller1031
-    - text: Resume
-      icon: file-text
-      href: https://emiller1031.github.io/portfolio/resume.html
+    - text: LinkedIn
+      icon: linkedin
+      href: https://www.linkedin.com/in/elizabeth-miller-204a13160/
   id: ppc
 ---
 
