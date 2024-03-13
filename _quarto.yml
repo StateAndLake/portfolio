@@ -15,15 +15,21 @@ website:
         menu: 
           - upp462.qmd
           - finalproj.Rmd
-      - text: "Animation"
-        menu: 
-          - urbanrenewal.qmd
-          - gifs.qmd
       - text: "Urban Design"
         menu:
           - nicollet.qmd
           - imd.qmd
           - encuentro.qmd
+      - text: "Writing"
+        menu: 
+          - imdreport.qmd
+          - evanston.qmd
+          - lfnc.qmd
+          - capstone.qmd
+      - text: "Animation"
+        menu: 
+          - urbanrenewal.qmd
+          - gifs.qmd
 
 format:
   html:

@@ -6,7 +6,7 @@ resources: ElizabethMiller_2024_resume_1_28.pdf
 about:
   template: trestles
   image-shape: round
-  image-width: 15em
+  image-width: 20em
   links:
     - text: Email
       icon: envelope
