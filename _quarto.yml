@@ -14,7 +14,7 @@ website:
       - text: "Mapping and Data Analysis"
         menu: 
           - upp462.qmd
-          - finalproj.Rmd
+          - finalproj.qmd
       - text: "Urban Design"
         menu:
           - nicollet.qmd
