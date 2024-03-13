@@ -692,7 +692,7 @@ cook_water_housingdensity %>%
             avg_water = mean(gpcd)) %>%
   ggplot(aes(x = year,
               y = avg_water)) +
-    geom_smooth(color = "skyblue", se = F) +  
+    geom_line(color = "skyblue", se = F) +  
   geom_point(color = "royalblue4") +
   scale_y_continuous(limits = c(0, 125)) +
   labs(x = "Year",
@@ -743,7 +743,7 @@ cook_water_housingdensity %>%
               y = avg_units)
               ) +
   scale_y_continuous(limits = c(0, 1800)) +
-  geom_smooth(color = "tomato3")+
+  geom_line(color = "tomato3")+
     geom_point(color = "tomato4") +
     labs(x = "Year",
        y = "Average Housing Density \n (units per sq mile)",
@@ -793,7 +793,7 @@ cook_water_housingdensity %>%
   ggplot(aes(x = avg_units,
               y = avg_water)) +
     geom_point() +
-   geom_smooth(color = "olivedrab4", se = F) +
+   geom_line(color = "olivedrab4", se = F) +
   labs(x = html("Average Housing Units \n Per Square Mile"),
        y = "Average Residential \n GPCD Withdrawals",
        title = "Average Housing Density and Average \n Residential Gallons of Water \n Per Capita Per Day (GPCD)",
@@ -810,7 +810,7 @@ housing_FSI_2020 %>%
   ggplot(aes(x = units_per_sqmile,
              y = FSI)) +
   geom_point(color = "goldenrod4") +
-  geom_smooth(color = "cadetblue",
+  geom_line(color = "cadetblue",
               se = F) +
   labs(x = html("Average Housing Units \n Per Square Mile"),
        y = "Flood Susceptibilty Index",
