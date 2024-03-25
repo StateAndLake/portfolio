@@ -2,7 +2,7 @@
 title: "GIS Approach to Site Selection for Affordable Housing"
 ---
 
-*This project was completed in Fall of 2023 for an intermediate GIS course. I undertook this project in a group, but I developed the project methods, produced the flowchart using Illustrator, and was responsible for 50% of the write-up, data analysis, and StoryMap. I have included the final map on this site using RShiny, but [the StoryMap can be viewed here](https://storymaps.arcgis.com/stories/932381da2b374fb4afcdc0be675b981d).*
+*This project was completed in Fall of 2023 for an intermediate GIS course. I undertook this project in a group, but I developed the project methods, produced the flowchart using Illustrator, and was responsible for 50% of the write-up, data analysis, and StoryMap. I have included the final map of our affordability index on this site, but* [the entire project and StoryMap can be viewed here](https://storymaps.arcgis.com/stories/932381da2b374fb4afcdc0be675b981d)*.*
 
 ## Introduction
 
@@ -15,3 +15,21 @@ We are not so much interested in the natural distribution of affordable housing 
 ## Methods
 
 ![](images/methods%20flowchart.png)
+
+```{r}
+library(tmap)
+tmap_mode("view")
+tmap_options(check.and.fix = T)
+
+# read raster
+index <- sf::st_read("C:/Users/eemil/Documents/courses/archive/fall23/upp462/projects/FinalProject3/FinalProject3/Mydata/project_3.gdb", layer = "suitability_polygon")
+
+chi <- sf::st_read("C:/Users/eemil/Documents/courses/archive/fall23/upp462/projects/FinalProject3/FinalProject3/Mydata/Project_3_12_2_em.gdb", layer = "Project_OutDataset_ChicagoLimits")
+
+# Plot Chicago boundaries
+tm_shape(chi) +
+  tm_borders()
+
+tm_shape(index) +
+  tm_polygons()
+```
