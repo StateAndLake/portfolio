@@ -4,6 +4,40 @@ title: "New Nicollet Redevelopment"
 
 *These works were completed throughout fall 2023 and winter 2024 for the 2024 American Planning Association (APA) Student Planning and Design Competition. My team qualified as one of the top three finalist teams, and we will present our proposal at the National Planning Conference in Minneapolis in 2024. You can [view the full plan here](https://uofi.box.com/s/7ujeha4qc0ji87bu9tjcij96s2255e9o) and [view the StoryMap here.](https://storymaps.arcgis.com/stories/576c456efcbe4f7eafb0e187e1806651)*
 
+*I collaborated on this project with three other team members, but the works included on this page are my own. I also served as a co-lead on the project.*
+
 # Prompt
 
 Student teams were tasked with developing specific planning and design recommendations for the New Nicollet Redevelopment site, a vacant former Kmart lot at the intersection of Lake Street and Nicollet Avenue in Minneapolis, Minnesota.
+
+# Site Renderings
+
+I created the following site renderings using SketchUp and Illustrator to brainstorm what the design program of the site may look like and how it may evolve.
+
+![](images/compiled_project2-01.png){fig-align="center"}
+
+![](images/compiled_project2-02.png){fig-align="center"}
+
+![](images/compiled_project2-03.png){fig-align="center"}
+
+![](images/compiled_project2-04.png){fig-align="center"}
+
+# Park User Experience
+
+The following collages, created in Photoshop, illustrate how folks may use the proposed park at all times and in all seasons.
+
+## Day and Night
+
+![](images/day-collage.png)
+
+![](images/night-collage-draft.png)
+
+People of all ages can enjoy daytime programming and play at the New Nicollet Park, from games with friends to live jazz music. Yet the New Nicollet Park remains abuzz even in the nighttime. The amphitheater can convert to a movie screen for people to enjoy movie nights, and extensive lighting promotes safety in the park.
+
+## Seasonality
+
+![](images/winter-collage-transparent-red.png)
+
+![](images/summer-collage-winterskyDESAT.png)
+
+New Nicollet Park was designed with Minneapolis's seasons in mind. Neighbors can cool off in the summer heat under the tree canopy of the park or at the park’s splash pad. Native plantings with deep root systems can help absorb heavy summer rains. People can continue to find recreational opportunities in the cold winter months by making use of the ice rink, which converts back to a splash pad in the summertime.
