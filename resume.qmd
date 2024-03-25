@@ -85,6 +85,18 @@ about:
 
 ------------------------------------------------------------------------
 
+# Awards
+
+#### 2024 American Planning Association Student Planning and Design Competition Finalist
+
+-   Co-led a team to produce a proposal for redeveloping a former Kmart lot in Minneapolis, Minnesota as part of a national planning and design competition
+
+-   Conducted existing conditions research, managed project, produced maps and graphics, and created ArcGIS Online StoryMap for final product
+
+-   Will present proposal with team members to final jury in April 2024
+
+------------------------------------------------------------------------
+
 # Proficiencies
 
 [ArcGIS (Network Analyst, Spatial Analyst, ArcGIS Online) \| R \| InDesign \| Illustrator \| Photoshop \| SketchUp]{.smallcaps}
