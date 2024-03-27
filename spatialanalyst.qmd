@@ -1,3 +1,25 @@
 ---
 title: "Spatial Analyst: Grocery Store Access and Food Security Indicators"
 ---
+
+*This project was completed for a GIS course in fall 2023 using the Spatial Analyst extension.*
+
+First, the spatial relationship between grocery stores was determined using the Average Nearest Neighbor tool. The data have a statistically significant tendency toward dispersal. A distance raster was created for distance from each point, and using the Zonal Statistics as Table tool, the mean distance from the nearest grocery store was determined for each census tract and joined back to the feature class of census tracts.
+
+![](images/meandistmiles_Page_3-01.png)
+
+A Getis-Ord Gi\* hot spot analysis was run using a distance band informed by the output of the Incremental Spatial Autocorrelation tool.
+
+![](images/meandistmiles_Page_4-01.png)
+
+I compared the hot and cold spots to census data on the share of households that have at least one member with a disability, as this can have further implications for food access.
+
+![](images/meandistmiles_Page_5-01.png)
+
+Areas in the City of Chicago with a statistically significant high average distance to the nearest grocery store (or hot spots) are often home to households that have other high barriers to accessing food (see Table 1). Of households living in hotspots, 25.7% lived below the poverty line in 2021. This is higher than the city as a whole, in which 16.05% of households experienced poverty, and even higher than cold spots (or areas with a statistically significant low average distance to a grocery store). 27.68% of households in hot spots have at least one member with a disability, compared to 20.89% for the City of Chicago and 13.85% for cold spots. Almost 30% of households in hot spots use some form of food assistance program, such as the Supplemental Nutrition Assistance Program (SNAP).
+
+![Table 1](images/grocerystoreaccesstabel1-01.jpg)
+
+The difference between hot and cold spots becomes even more evident when assessed at the bin level. In hot spots with a 99% confidence level, 28.71% of households have at least one member with a disability. In cold spots with a 99% confidence level, 11.46% of households have at least one member with a disability (see Table 2). This has implications for food access because traveling farther distances to grocery stores may be more difficult for people with disabilities, as this means carrying groceries farther distances or needing to make use of more forms of transit that may not accommodate certain disabilities. This investigation confirms that people with low food access often face a multitude of barriers, from geographic distance to income level to unpredictable accessibility accommodations. Food assistance programs may help increase access, but they are generally underutilized, underfunded, and do not address the full scope of barriers to food access. These maps highlight areas where interventions to increase food access should be targeted, namely communities on the south- and far south-side of the city.
+
+![Table 2](images/hotspottable.jpg)
