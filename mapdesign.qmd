@@ -6,20 +6,50 @@ title: "Map Design"
 
 # Illinois Medical District
 
+In spring 2023, I was part of a studio course to devise a plan for the Illinois Medical District (IMD). I produced both of the following maps as part of our existing conditions research on the district.
+
+### Land Use in the IMD
+
 ![Land use map of the Illinois Medical District, 2023](images/landuse_FINAL_landusemap.png)
+
+This land use map demonstrates the paucity of green space in the district and the significant share of land dedicated to parking.
+
+### Transit Routes in the IMD
 
 ![Transit routes and ridership in the Illinois Medical District, 2023](images/transit_imdIfinal.png)
 
+This map is a creative approach to communicate both what transit routes exist in the district and the popularity of these routes. The thickness of the lines for the routes is proportionate to the routes' ridership counts.
+
 # New Nicollet
 
-![](images/parks_ECR_nobuildings-01.png)
+I created these maps for a group submission to the 2024 American Planning Association National Student Planning and Design Competition. My group placed as a top three finalist, and we will compete in a final round involving a presentation at the National Planning Conference in April 2024.
 
-![](images/flood_pixely_draft.png)
+These maps were critical to our existing conditions report and identification of challenges to overcome and strengths to leverage.
 
-![](images/transit_draft.png)
+### Park Access
+
+![Park access from former Kmart Site. Data source:](images/parks_ECR_nobuildings-01.png)
+
+### Bluespots
+
+![Bluespots around the former Kmart site. Data source: Metropolitan Council](images/flood_pixely_draft.png)
+
+### Transit Around the Site
+
+![Transit availability around the site. Data source:](images/transit_draft.png)
 
 # Armitage Avenue Corridor
 
+### Activity Map
+
 ![](images/activitymap-01.png)
 
+Unlike other maps on this page, this map originated in SketchUp and was processed in Illustrator. Activities were identified through participant observation along the corridor.
+
+### Traffic Flows
+
 ![](images/trafficflow.png)
+
+### Land Use Along the Corridor
+
+![](images/spatial%20blobfinal-01.png)
