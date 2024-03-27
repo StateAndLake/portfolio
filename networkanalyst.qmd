@@ -1,3 +1,99 @@
 ---
 title: "Network Analyst: Hospital Access in Cook County"
 ---
+
+*This project was completed in fall 2023 for a GIS course using the Network Analyst extension in ArcGIS Pro.*
+
+# Introduction
+
+The geographic distribution of hospitals has implications for healthcare access and health disparities. Inquiry into how this distribution interacts with road networks and the surrounding population can guide future policies aimed at increasing access in underserved areas. In Cook County, Illinois – an area that remains deeply segregated – the spatial configuration of hospitals has implications for racial equity as well.
+
+This report seeks to investigate spatial access to hospitals in Cook County by replicating the network analysis outlined in the work of Delamater et al (2012) on hospital access in Michigan. Delamater’s methods were adapted to suit the study area and local context.
+
+# Methods
+
+*See Appendix A for a flow chart visualizing the methods process detailed below.*
+
+## Road Data
+
+Road centerline data for Cook County was provided for this project. However, speed limits for each road class had to be determined to build the network dataset. The centerline shapefile already contained a field describing the class of each road – alley, arterial, collector, expressway, local road, local slow, and ramp – so speed limits were determined based on this classification. Alleys were removed from the shapefile to facilitate faster processing speeds and because their low desirability for fast travel means that they would likely not impact the network analysis significantly.
+
+The statewide speed limit for interstates near or around major cities in Illinois is 55 miles per hour, so this was the expressway speed limit for the first speed limit variable (SL1). In the City of Chicago (which takes up a significant area of Cook County), the speed limit is 30 miles per hour unless otherwise marked, so this was the speed limit for “local roads” in SL1 (“Automated Speed Enforcement Frequently Asked Questions” n.d.). “Local slow” features were treated as school zones and assigned a speed limit of 20 MPH in SL1 (“Automated Speed Enforcement Frequently Asked Questions” n.d.). Based on the speed limits of known roads each class and on the USDOT’s Federal Highway Administration’s classification system, “collector” and “arterial” roads were assigned 35 and 45 MPH speed limits respectively (“Road Function Classifications” 2000). Ramps were given a speed limit of 25 MPH based on Delamater’s classification system. 
+
+The second speed limit variable (SL2) was calculated by adding 10 to SL1. This is based both on anecdotal experience of high traffic speeds in the Chicagoland area and on guidelines for emergency vehicle drivers (Kupas 2017). Two different drive time estimates were calculated based on each speed limit variable.
+
+## Population Data
+
+A shapefile of the boundary of Cook County was obtained from the county’s data portal (“Cook County Border” 2022). Population data was sourced from the United States 2020 Decennial Census, the most recent census data available at the time of analysis. The P9 data table on race and ethnicity at the block level was acquired for Cook County and joined to a shapefile of the blocks in Cook County, also sourced from the US Census Bureau (“P9, Hispanic or Latino, and Not Hispanic or Latino By Race” 2020; “TIGER/Line 2020 Block Shapefile” 2020). A hospital shapefile for the county was acquired from the City of Chicago’s Open Data Portal (“Cook County - Hospitals,” n.d.). Hospitals that had closed were removed from the dataset, including Michael Reese Hospital, Neurologic and Orthopedic Institute of Chicago, Sacred Heart Hospital, MetroSouth, and Oak Forest (Ecker 2022; Grossman 2021; Swanson 2009; Wang and Schorsch 2013; “Oak Forest Demolition” n.d.). 
+
+## Network Comparison
+
+Six different network datasets were developed from the two different speed limit classification systems. Three different turn delay settings were tested for each speed limit classification. One of the turn delay settings retained the default settings, one replicated Delamater’s most accurate network dataset (N5), and one involved no turn delays. The unique combinations of these settings resulted in the six network datasets that were considered for use in creating service area polygons for the hospitals. 
+
+Since the shapefile of hospitals already contained addresses that could be easily verified and used in navigation software, 10 different hospital points were selected to serve as test points to compare the drive time estimates of each network dataset to drive time estimates of Google Maps and Waze. 5 test pairs were developed from these 10 points. Pairs were organized so the points were far from each other and in different areas of the county. A “route” analysis was run for each pair and compared to four different drive time scenarios from Google Maps and Waze. Waze was included to diversify the estimates used, and because the crowd-sourcing nature of the platform may increase accuracy of travel times. Two drive time scenarios involved arriving at 1 AM on a weeknight to remove traffic slowdowns characteristic of the area. See Appendix B for maps of each route, the resulting drive times, and the Google Maps and Waze estimates. 
+
+The network dataset using SL1 and default turn delay settings had the lowest average difference from the Google Maps and Waze drive time estimates, so this was determined to be the best network dataset for creating service polygons.
+
+## Network Analysis
+
+The service area analysis was run using the best suited network dataset (default turn delay settings and SL1). Cutoffs were set to 3 and 10. 3 was selected to simulate an emergency case and 10 was selected based on research by the Pew Research Center that urban residents, on average, live 10.4 minutes from a hospital (Lam, Broderick, and Toor 2018).
+
+# Results
+
+Of Cook County’s 5,275,541 residents, 673,626 people in Cook County live more than a 10 minute drive away from a hospital, representing about 12.77% of the county’s population. See Figure 1 for a map overlaying drive times to a hospital with population data. See Appendix C for a map illustrating population density with drive times.
+
+![Figure 1. Access to Hospitals in Cook County, IL: Drive Time Estimates & Population by Census Block, 2023.](images/servicearea_population.png)
+
+Figure 2 provides a summary of the population living within a 3 minute drive of a hospital, within a 3 to 10 minute drive to a hospital, and farther than 10 minutes from a hospital. Table 1 provides a breakdown of these service area cohorts by racial or ethnic demographic.
+
+![Figure 2. Population Residing in Hospital Service Areas by Drive Time, Cook County, IL, 2023](images/dissolvedservicearea.png)
+
+According to this network analysis, of the people who live farther than 10 minutes from a hospital, about 53% are white, 21% are Hispanic or Latinx, and 17% are Black or African American. In contrast, about 40% of people who live within 3 minutes of a hospital are white, 26% are Black or African American, and 23% are Hispanic or Latinx. See Appendix D for maps of population by racial or ethnic group overlayed with the drive time polygons.
+
+![Table 1. Drive Times to Nearest Hospital by Racial or Ethnic Group.](images/drivetimetable.png)
+
+# Discussion & Limitations
+
+At the time of writing, a major construction project was occurring on the Kennedy Expressway, skewing arrival time estimates from Google Maps. This study does not account for traffic, so the area’s notorious slowdowns and traffic jams render the approximations of this study a highly conservative estimate. This study only addresses one dimension of access to hospital facilities and services. Language barriers, access to health insurance, and racism and discrimination in the healthcare industry are considerable obstacles to overcome in accessing healthcare. The study also does not address the resources available at each facility or the quality of care they are able to provide. Further, this study only includes hospitals within the borders of Cook County, though traveling to hospitals outside of the county but near its border might be a more efficient choice for people living near the county’s border. These northern suburbs are predominantly white, so the service area polygons likely overstate the proportion of white people who live farther than a 10 minute drive from a hospital. On its own, this presents an inaccurate depiction of disparities in access to healthcare, because in reality, Black and Latinx communities are more likely to suffer from inequitable access to healthcare than white communities (Williams and Rucker 2000; Al Shamsi et al. 2020). However, it makes intuitive sense that less dense, more suburban areas would generally be a farther drive from amenities than more urban city cores. On average, suburbanites live 11.9 minutes from the closest hospital (Lam, Broderick, and Toor 2018). These maps may provide a useful basis for further investigation into the interactions between race, ethnicity, suburbanization, and healthcare equity.
+
+# Conclusion
+
+Further inquiry into the spatial and aspatial dimensions of access to healthcare in Cook County, IL is necessary. The results of this study estimate that over 670,000 people, or 12.77%, in Cook County live farther than a 10 minute drive of a hospital. However, this may not be an accurate portrayal of spatial access, as people on the outer edges of the county may use hospitals outside of the county and have higher access than suggested in this report. Further, people who live within 3 or 10 minutes of a hospital may have lower access than suggested in this report because of other barriers to accessing healthcare, such as language barriers, discrimination, prohibitive healthcare costs, or being uninsured.
+
+# Appendices
+
+## Appendix A.
+
+![](images/AppendixA.png)
+
+## Appendix B.
+
+![](images/testpair1.png)
+
+![](images/testpair2.png)
+
+![](images/testpair3.png)
+
+![](images/testpair4.png)
+
+![](images/testpair5.png)
+
+![](images/drivetimetablecompare-01.jpg)
+
+![](images/drivetimetablecompare2-01.jpg)
+
+## Appendix C.
+
+![](images/drivetime_populationdensity.png)
+
+## Appendix D.
+
+![](images/pctblack_eq_int.png)
+
+![](images/pctlatinx_eq_int.png)
+
+![](images/pctwhite_equalint.png)
+
+## Appendix E.
+
+![](images/servicearea.png)

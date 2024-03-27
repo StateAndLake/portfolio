@@ -180,5 +180,75 @@
     "title": "New Nicollet Redevelopment",
     "section": "Seasonality",
     "text": "Seasonality\n\n\nNew Nicollet Park was designed with Minneapolis’s seasons in mind. Neighbors can cool off in the summer heat under the tree canopy of the park or at the park’s splash pad. Native plantings with deep root systems can help absorb heavy summer rains. People can continue to find recreational opportunities in the cold winter months by making use of the ice rink, which converts back to a splash pad in the summertime."
+  },
+  {
+    "objectID": "networkanalyst.html",
+    "href": "networkanalyst.html",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "",
+    "text": "This project was completed in fall 2023 for a GIS course using the Network Analyst extension in ArcGIS Pro."
+  },
+  {
+    "objectID": "networkanalyst.html#road-data",
+    "href": "networkanalyst.html#road-data",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Road Data",
+    "text": "Road Data\nRoad centerline data for Cook County was provided for this project. However, speed limits for each road class had to be determined to build the network dataset. The centerline shapefile already contained a field describing the class of each road – alley, arterial, collector, expressway, local road, local slow, and ramp – so speed limits were determined based on this classification. Alleys were removed from the shapefile to facilitate faster processing speeds and because their low desirability for fast travel means that they would likely not impact the network analysis significantly.\nThe statewide speed limit for interstates near or around major cities in Illinois is 55 miles per hour, so this was the expressway speed limit for the first speed limit variable (SL1). In the City of Chicago (which takes up a significant area of Cook County), the speed limit is 30 miles per hour unless otherwise marked, so this was the speed limit for “local roads” in SL1 (“Automated Speed Enforcement Frequently Asked Questions” n.d.). “Local slow” features were treated as school zones and assigned a speed limit of 20 MPH in SL1 (“Automated Speed Enforcement Frequently Asked Questions” n.d.). Based on the speed limits of known roads each class and on the USDOT’s Federal Highway Administration’s classification system, “collector” and “arterial” roads were assigned 35 and 45 MPH speed limits respectively (“Road Function Classifications” 2000). Ramps were given a speed limit of 25 MPH based on Delamater’s classification system. \nThe second speed limit variable (SL2) was calculated by adding 10 to SL1. This is based both on anecdotal experience of high traffic speeds in the Chicagoland area and on guidelines for emergency vehicle drivers (Kupas 2017). Two different drive time estimates were calculated based on each speed limit variable."
+  },
+  {
+    "objectID": "networkanalyst.html#population-data",
+    "href": "networkanalyst.html#population-data",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Population Data",
+    "text": "Population Data\nA shapefile of the boundary of Cook County was obtained from the county’s data portal (“Cook County Border” 2022). Population data was sourced from the United States 2020 Decennial Census, the most recent census data available at the time of analysis. The P9 data table on race and ethnicity at the block level was acquired for Cook County and joined to a shapefile of the blocks in Cook County, also sourced from the US Census Bureau (“P9, Hispanic or Latino, and Not Hispanic or Latino By Race” 2020; “TIGER/Line 2020 Block Shapefile” 2020). A hospital shapefile for the county was acquired from the City of Chicago’s Open Data Portal (“Cook County - Hospitals,” n.d.). Hospitals that had closed were removed from the dataset, including Michael Reese Hospital, Neurologic and Orthopedic Institute of Chicago, Sacred Heart Hospital, MetroSouth, and Oak Forest (Ecker 2022; Grossman 2021; Swanson 2009; Wang and Schorsch 2013; “Oak Forest Demolition” n.d.)."
+  },
+  {
+    "objectID": "networkanalyst.html#network-comparison",
+    "href": "networkanalyst.html#network-comparison",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Network Comparison",
+    "text": "Network Comparison\nSix different network datasets were developed from the two different speed limit classification systems. Three different turn delay settings were tested for each speed limit classification. One of the turn delay settings retained the default settings, one replicated Delamater’s most accurate network dataset (N5), and one involved no turn delays. The unique combinations of these settings resulted in the six network datasets that were considered for use in creating service area polygons for the hospitals. \nSince the shapefile of hospitals already contained addresses that could be easily verified and used in navigation software, 10 different hospital points were selected to serve as test points to compare the drive time estimates of each network dataset to drive time estimates of Google Maps and Waze. 5 test pairs were developed from these 10 points. Pairs were organized so the points were far from each other and in different areas of the county. A “route” analysis was run for each pair and compared to four different drive time scenarios from Google Maps and Waze. Waze was included to diversify the estimates used, and because the crowd-sourcing nature of the platform may increase accuracy of travel times. Two drive time scenarios involved arriving at 1 AM on a weeknight to remove traffic slowdowns characteristic of the area. See Appendix B for maps of each route, the resulting drive times, and the Google Maps and Waze estimates. \nThe network dataset using SL1 and default turn delay settings had the lowest average difference from the Google Maps and Waze drive time estimates, so this was determined to be the best network dataset for creating service polygons."
+  },
+  {
+    "objectID": "networkanalyst.html#network-analysis",
+    "href": "networkanalyst.html#network-analysis",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Network Analysis",
+    "text": "Network Analysis\nThe service area analysis was run using the best suited network dataset (default turn delay settings and SL1). Cutoffs were set to 3 and 10. 3 was selected to simulate an emergency case and 10 was selected based on research by the Pew Research Center that urban residents, on average, live 10.4 minutes from a hospital (Lam, Broderick, and Toor 2018)."
+  },
+  {
+    "objectID": "networkanalyst.html#appendix-a.",
+    "href": "networkanalyst.html#appendix-a.",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Appendix A.",
+    "text": "Appendix A."
+  },
+  {
+    "objectID": "networkanalyst.html#appendix-b.",
+    "href": "networkanalyst.html#appendix-b.",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Appendix B.",
+    "text": "Appendix B."
+  },
+  {
+    "objectID": "networkanalyst.html#appendix-c.",
+    "href": "networkanalyst.html#appendix-c.",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Appendix C.",
+    "text": "Appendix C."
+  },
+  {
+    "objectID": "networkanalyst.html#appendix-d.",
+    "href": "networkanalyst.html#appendix-d.",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Appendix D.",
+    "text": "Appendix D."
+  },
+  {
+    "objectID": "networkanalyst.html#appendix-e.",
+    "href": "networkanalyst.html#appendix-e.",
+    "title": "Network Analyst: Hospital Access in Cook County",
+    "section": "Appendix E.",
+    "text": "Appendix E."
   }
 ]

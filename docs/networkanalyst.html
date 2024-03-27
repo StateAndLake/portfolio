@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Elizabeth Miller - Network Analyst: Hospital Access in Cook County</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Elizabeth Miller</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mapping-and-data-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mapping and Data Analysis</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-mapping-and-data-analysis">    
+        <li>
+    <a class="dropdown-item" href="./upp462.html">
+ <span class="dropdown-text">GIS Approach to Site Selection for Affordable Housing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./finalproj.html">
+ <span class="dropdown-text">Anticipating Climate Migration</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./networkanalyst.html">
+ <span class="dropdown-text">Network Analyst: Hospital Access in Cook County</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./spatialanalyst.html">
+ <span class="dropdown-text">Spatial Analyst: Grocery Store Access and Food Security Indicators</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./mapdesign.html">
+ <span class="dropdown-text">Map Design</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./capstone.html">
+ <span class="dropdown-text">Greenway Access in Mecklenburg County</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-urban-design" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Urban Design</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-urban-design">    
+        <li>
+    <a class="dropdown-item" href="./nicollet.html">
+ <span class="dropdown-text">New Nicollet Redevelopment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./imd.html">
+ <span class="dropdown-text">Illinois Medical District</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./encuentro.html">
+ <span class="dropdown-text">Encuentro Square Park</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-writing" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Writing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-writing">    
+        <li>
+    <a class="dropdown-item" href="./evanston.html">
+ <span class="dropdown-text">Evanston, IL: Community Profile</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lfnc.html">
+ <span class="dropdown-text">Lead for North Carolina Blog Post</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-animation" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Animation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-animation">    
+        <li>
+    <a class="dropdown-item" href="./urbanrenewal.html">
+ <span class="dropdown-text">Visualizing Urban Renewal</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./gifs.html">
+ <span class="dropdown-text">Digital Art</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#road-data" id="toc-road-data" class="nav-link" data-scroll-target="#road-data">Road Data</a></li>
+  <li><a href="#population-data" id="toc-population-data" class="nav-link" data-scroll-target="#population-data">Population Data</a></li>
+  <li><a href="#network-comparison" id="toc-network-comparison" class="nav-link" data-scroll-target="#network-comparison">Network Comparison</a></li>
+  <li><a href="#network-analysis" id="toc-network-analysis" class="nav-link" data-scroll-target="#network-analysis">Network Analysis</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#discussion-limitations" id="toc-discussion-limitations" class="nav-link" data-scroll-target="#discussion-limitations">Discussion &amp; Limitations</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">Appendices</a>
+  <ul class="collapse">
+  <li><a href="#appendix-a." id="toc-appendix-a." class="nav-link" data-scroll-target="#appendix-a.">Appendix A.</a></li>
+  <li><a href="#appendix-b." id="toc-appendix-b." class="nav-link" data-scroll-target="#appendix-b.">Appendix B.</a></li>
+  <li><a href="#appendix-c." id="toc-appendix-c." class="nav-link" data-scroll-target="#appendix-c.">Appendix C.</a></li>
+  <li><a href="#appendix-d." id="toc-appendix-d." class="nav-link" data-scroll-target="#appendix-d.">Appendix D.</a></li>
+  <li><a href="#appendix-e." id="toc-appendix-e." class="nav-link" data-scroll-target="#appendix-e.">Appendix E.</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Network Analyst: Hospital Access in Cook County</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>This project was completed in fall 2023 for a GIS course using the Network Analyst extension in ArcGIS Pro.</em></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The geographic distribution of hospitals has implications for healthcare access and health disparities. Inquiry into how this distribution interacts with road networks and the surrounding population can guide future policies aimed at increasing access in underserved areas. In Cook County, Illinois – an area that remains deeply segregated – the spatial configuration of hospitals has implications for racial equity as well.</p>
+<p>This report seeks to investigate spatial access to hospitals in Cook County by replicating the network analysis outlined in the work of Delamater et al (2012) on hospital access in Michigan. Delamater’s methods were adapted to suit the study area and local context.</p>
+</section>
+<section id="methods" class="level1">
+<h1>Methods</h1>
+<p><em>See Appendix A for a flow chart visualizing the methods process detailed below.</em></p>
+<section id="road-data" class="level2">
+<h2 class="anchored" data-anchor-id="road-data">Road Data</h2>
+<p>Road centerline data for Cook County was provided for this project. However, speed limits for each road class had to be determined to build the network dataset. The centerline shapefile already contained a field describing the class of each road – alley, arterial, collector, expressway, local road, local slow, and ramp – so speed limits were determined based on this classification. Alleys were removed from the shapefile to facilitate faster processing speeds and because their low desirability for fast travel means that they would likely not impact the network analysis significantly.</p>
+<p>The statewide speed limit for interstates near or around major cities in Illinois is 55 miles per hour, so this was the expressway speed limit for the first speed limit variable (SL1). In the City of Chicago (which takes up a significant area of Cook County), the speed limit is 30 miles per hour unless otherwise marked, so this was the speed limit for “local roads” in SL1 (“Automated Speed Enforcement Frequently Asked Questions” n.d.). “Local slow” features were treated as school zones and assigned a speed limit of 20 MPH in SL1 (“Automated Speed Enforcement Frequently Asked Questions” n.d.). Based on the speed limits of known roads each class and on the USDOT’s Federal Highway Administration’s classification system, “collector” and “arterial” roads were assigned 35 and 45 MPH speed limits respectively (“Road Function Classifications” 2000). Ramps were given a speed limit of 25 MPH based on Delamater’s classification system.&nbsp;</p>
+<p>The second speed limit variable (SL2) was calculated by adding 10 to SL1. This is based both on anecdotal experience of high traffic speeds in the Chicagoland area and on guidelines for emergency vehicle drivers (Kupas 2017). Two different drive time estimates were calculated based on each speed limit variable.</p>
+</section>
+<section id="population-data" class="level2">
+<h2 class="anchored" data-anchor-id="population-data">Population Data</h2>
+<p>A shapefile of the boundary of Cook County was obtained from the county’s data portal (“Cook County Border” 2022). Population data was sourced from the United States 2020 Decennial Census, the most recent census data available at the time of analysis. The P9 data table on race and ethnicity at the block level was acquired for Cook County and joined to a shapefile of the blocks in Cook County, also sourced from the US Census Bureau (“P9, Hispanic or Latino, and Not Hispanic or Latino By Race” 2020; “TIGER/Line 2020 Block Shapefile” 2020). A hospital shapefile for the county was acquired from the City of Chicago’s Open Data Portal (“Cook County - Hospitals,” n.d.). Hospitals that had closed were removed from the dataset, including Michael Reese Hospital, Neurologic and Orthopedic Institute of Chicago, Sacred Heart Hospital, MetroSouth, and Oak Forest (Ecker 2022; Grossman 2021; Swanson 2009; Wang and Schorsch 2013; “Oak Forest Demolition” n.d.).&nbsp;</p>
+</section>
+<section id="network-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="network-comparison">Network Comparison</h2>
+<p>Six different network datasets were developed from the two different speed limit classification systems. Three different turn delay settings were tested for each speed limit classification. One of the turn delay settings retained the default settings, one replicated Delamater’s most accurate network dataset (N5), and one involved no turn delays. The unique combinations of these settings resulted in the six network datasets that were considered for use in creating service area polygons for the hospitals.&nbsp;</p>
+<p>Since the shapefile of hospitals already contained addresses that could be easily verified and used in navigation software, 10 different hospital points were selected to serve as test points to compare the drive time estimates of each network dataset to drive time estimates of Google Maps and Waze. 5 test pairs were developed from these 10 points. Pairs were organized so the points were far from each other and in different areas of the county. A “route” analysis was run for each pair and compared to four different drive time scenarios from Google Maps and Waze. Waze was included to diversify the estimates used, and because the crowd-sourcing nature of the platform may increase accuracy of travel times. Two drive time scenarios involved arriving at 1 AM on a weeknight to remove traffic slowdowns characteristic of the area. See Appendix B for maps of each route, the resulting drive times, and the Google Maps and Waze estimates.&nbsp;</p>
+<p>The network dataset using SL1 and default turn delay settings had the lowest average difference from the Google Maps and Waze drive time estimates, so this was determined to be the best network dataset for creating service polygons.</p>
+</section>
+<section id="network-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="network-analysis">Network Analysis</h2>
+<p>The service area analysis was run using the best suited network dataset (default turn delay settings and SL1). Cutoffs were set to 3 and 10. 3 was selected to simulate an emergency case and 10 was selected based on research by the Pew Research Center that urban residents, on average, live 10.4 minutes from a hospital (Lam, Broderick, and Toor 2018).</p>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>Of Cook County’s 5,275,541 residents, 673,626 people in Cook County live more than a 10 minute drive away from a hospital, representing about 12.77% of the county’s population. See Figure 1 for a map overlaying drive times to a hospital with population data. See Appendix C for a map illustrating population density with drive times.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/servicearea_population.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1. Access to Hospitals in Cook County, IL: Drive Time Estimates &amp; Population by Census Block, 2023.</figcaption>
+</figure>
+</div>
+<p>Figure 2 provides a summary of the population living within a 3 minute drive of a hospital, within a 3 to 10 minute drive to a hospital, and farther than 10 minutes from a hospital. Table 1 provides a breakdown of these service area cohorts by racial or ethnic demographic.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/dissolvedservicearea.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2. Population Residing in Hospital Service Areas by Drive Time, Cook County, IL, 2023</figcaption>
+</figure>
+</div>
+<p>According to this network analysis, of the people who live farther than 10 minutes from a hospital, about 53% are white, 21% are Hispanic or Latinx, and 17% are Black or African American. In contrast, about 40% of people who live within 3 minutes of a hospital are white, 26% are Black or African American, and 23% are Hispanic or Latinx. See Appendix D for maps of population by racial or ethnic group overlayed with the drive time polygons.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/drivetimetable.png" class="img-fluid figure-img"></p>
+<figcaption>Table 1. Drive Times to Nearest Hospital by Racial or Ethnic Group.</figcaption>
+</figure>
+</div>
+</section>
+<section id="discussion-limitations" class="level1">
+<h1>Discussion &amp; Limitations</h1>
+<p>At the time of writing, a major construction project was occurring on the Kennedy Expressway, skewing arrival time estimates from Google Maps. This study does not account for traffic, so the area’s notorious slowdowns and traffic jams render the approximations of this study a highly conservative estimate. This study only addresses one dimension of access to hospital facilities and services. Language barriers, access to health insurance, and racism and discrimination in the healthcare industry are considerable obstacles to overcome in accessing healthcare. The study also does not address the resources available at each facility or the quality of care they are able to provide. Further, this study only includes hospitals within the borders of Cook County, though traveling to hospitals outside of the county but near its border might be a more efficient choice for people living near the county’s border. These northern suburbs are predominantly white, so the service area polygons likely overstate the proportion of white people who live farther than a 10 minute drive from a hospital. On its own, this presents an inaccurate depiction of disparities in access to healthcare, because in reality, Black and Latinx communities are more likely to suffer from inequitable access to healthcare than white communities (Williams and Rucker 2000; Al Shamsi et al.&nbsp;2020). However, it makes intuitive sense that less dense, more suburban areas would generally be a farther drive from amenities than more urban city cores. On average, suburbanites live 11.9 minutes from the closest hospital (Lam, Broderick, and Toor 2018). These maps may provide a useful basis for further investigation into the interactions between race, ethnicity, suburbanization, and healthcare equity.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Further inquiry into the spatial and aspatial dimensions of access to healthcare in Cook County, IL is necessary. The results of this study estimate that over 670,000 people, or 12.77%, in Cook County live farther than a 10 minute drive of a hospital. However, this may not be an accurate portrayal of spatial access, as people on the outer edges of the county may use hospitals outside of the county and have higher access than suggested in this report. Further, people who live within 3 or 10 minutes of a hospital may have lower access than suggested in this report because of other barriers to accessing healthcare, such as language barriers, discrimination, prohibitive healthcare costs, or being uninsured.</p>
+</section>
+<section id="appendices" class="level1">
+<h1>Appendices</h1>
+<section id="appendix-a." class="level2">
+<h2 class="anchored" data-anchor-id="appendix-a.">Appendix A.</h2>
+<p><img src="images/AppendixA.png" class="img-fluid"></p>
+</section>
+<section id="appendix-b." class="level2">
+<h2 class="anchored" data-anchor-id="appendix-b.">Appendix B.</h2>
+<p><img src="images/testpair1.png" class="img-fluid"></p>
+<p><img src="images/testpair2.png" class="img-fluid"></p>
+<p><img src="images/testpair3.png" class="img-fluid"></p>
+<p><img src="images/testpair4.png" class="img-fluid"></p>
+<p><img src="images/testpair5.png" class="img-fluid"></p>
+<p><img src="images/drivetimetablecompare-01.jpg" class="img-fluid"></p>
+<p><img src="images/drivetimetablecompare2-01.jpg" class="img-fluid"></p>
+</section>
+<section id="appendix-c." class="level2">
+<h2 class="anchored" data-anchor-id="appendix-c.">Appendix C.</h2>
+<p><img src="images/drivetime_populationdensity.png" class="img-fluid"></p>
+</section>
+<section id="appendix-d." class="level2">
+<h2 class="anchored" data-anchor-id="appendix-d.">Appendix D.</h2>
+<p><img src="images/pctblack_eq_int.png" class="img-fluid"></p>
+<p><img src="images/pctlatinx_eq_int.png" class="img-fluid"></p>
+<p><img src="images/pctwhite_equalint.png" class="img-fluid"></p>
+</section>
+<section id="appendix-e." class="level2">
+<h2 class="anchored" data-anchor-id="appendix-e.">Appendix E.</h2>
+<p><img src="images/servicearea.png" class="img-fluid"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
