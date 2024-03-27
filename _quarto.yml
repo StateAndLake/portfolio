@@ -13,7 +13,7 @@ website:
       - resume.qmd
       - text: "Mapping and Data Analysis"
         menu: 
-          - upp462.qmd
+          - siteselection.qmd
           - finalproj.qmd
           - networkanalyst.qmd
           - spatialanalyst.qmd
