@@ -17,7 +17,11 @@ We are not so much interested in the natural distribution of affordable housing 
 ![](images/methods%20flowchart.png)
 
 ```{r}
+#| code-fold: true
+
 library(tmap)
+library(RColorBrewer)
+
 tmap_mode("view")
 tmap_options(check.and.fix = T)
 
@@ -28,8 +32,10 @@ chi <- sf::st_read("C:/Users/eemil/Documents/courses/archive/fall23/upp462/proje
 
 # Plot Chicago boundaries
 tm_shape(chi) +
-  tm_borders()
-
-tm_shape(index) +
-  tm_polygons()
+  tm_borders() +
+  tm_shape(index) +
+  tm_polygons(col = "gridcode", 
+              border.col = NA,
+              palette = "Greens",
+              labels = "Site Suitability Score")
 ```

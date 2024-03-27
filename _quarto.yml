@@ -15,6 +15,10 @@ website:
         menu: 
           - upp462.qmd
           - finalproj.qmd
+          - networkanalyst.qmd
+          - spatialanalyst.qmd
+          - mapdesign.qmd
+          - capstone.qmd
       - text: "Urban Design"
         menu:
           - nicollet.qmd
@@ -22,10 +26,8 @@ website:
           - encuentro.qmd
       - text: "Writing"
         menu: 
-          - imdreport.qmd
           - evanston.qmd
           - lfnc.qmd
-          - capstone.qmd
       - text: "Animation"
         menu: 
           - urbanrenewal.qmd
