@@ -60,7 +60,7 @@
     "href": "upp462.html#methods",
     "title": "GIS Approach to Site Selection for Affordable Housing",
     "section": "Methods",
-    "text": "Methods\n\n\nlibrary(tmap)\n\nBreaking News: tmap 3.x is retiring. Please test v4, e.g. with\nremotes::install_github('r-tmap/tmap')\n\ntmap_mode(\"view\")\n\ntmap mode set to interactive viewing\n\n# read raster\nindex &lt;- sf::st_read(\"C:/Users/eemil/Documents/courses/archive/fall23/upp462/projects/FinalProject3/FinalProject3/Mydata/final_rasters_12_3_FINAL.gdb\", layer = \"FINAL_index\")\n\nReading layer `FINAL_index' from data source \n  `C:\\Users\\eemil\\Documents\\courses\\archive\\fall23\\upp462\\projects\\FinalProject3\\FinalProject3\\Mydata\\final_rasters_12_3_FINAL.gdb' \n  using driver `OpenFileGDB'\nSimple feature collection with 1 feature and 3 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 1091139 ymin: 1813926 xmax: 1205169 ymax: 1951626\nProjected CRS: NAD83 / Illinois East (ftUS)\n\nchi &lt;- sf::st_read(\"C:/Users/eemil/Documents/courses/archive/fall23/upp462/projects/FinalProject3/FinalProject3/Mydata/Project_3_12_2_em.gdb\", layer = \"Project_OutDataset_ChicagoLimits\")\n\nReading layer `Project_OutDataset_ChicagoLimits' from data source \n  `C:\\Users\\eemil\\Documents\\courses\\archive\\fall23\\upp462\\projects\\FinalProject3\\FinalProject3\\Mydata\\Project_3_12_2_em.gdb' \n  using driver `OpenFileGDB'\nSimple feature collection with 1 feature and 4 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 1091131 ymin: 1813892 xmax: 1205199 ymax: 1951669\nProjected CRS: NAD83 / Illinois East (ftUS)\n\n# Plot Chicago boundaries\ntm_shape(chi) +\n  tm_borders() +\ntm_shape(index) +\n  tm_polygons()"
+    "text": "Methods"
   },
   {
     "objectID": "encuentro.html",
@@ -270,6 +270,6 @@
     "href": "imd.html",
     "title": "Illinois Medical District",
     "section": "",
-    "text": "These collages were produced in Photoshop for a spring 2023 studio course to\n\nCampbell Square\n\nOur proposal involved\n\n\nPedestrianized Intersection\n\nPart of our proposal involved enhancing pedestrian infrastructure throughout the Illinois Medical District, including"
+    "text": "These collages were produced in Photoshop for a spring 2023 studio course aimed at creating a plan for the Illinois Medical District (IMD). My group’s proposal involved recommendations for three critical zones in the district.\n\nCampbell Square\n\nOur proposal involved\n\n\nPedestrianized Intersection\n\nPart of our proposal involved enhancing pedestrian infrastructure throughout the Illinois Medical District, including"
   }
 ]
