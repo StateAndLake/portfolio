@@ -10,7 +10,7 @@ In spring 2023, I was part of a studio course to devise a plan for the Illinois 
 
 ### Land Use in the IMD
 
-![Land use map of the Illinois Medical District, 2023](images/landuse_FINAL_landusemap.png)
+![Land use map of the Illinois Medical District, 2023. Data source: Chicago Metropolitan Agency for Planning 2018 Land Use Inventory (with manual updates)](images/landuse_FINAL_landusemap.png)
 
 This land use map demonstrates the paucity of green space in the district and the significant share of land dedicated to parking.
 
@@ -28,17 +28,25 @@ These maps were critical to our existing conditions report and identification of
 
 ### Park Access
 
-![Park access from former Kmart Site. Data source:](images/parks_ECR_nobuildings-01.png)
+![Park access from former Kmart Site. Data source: Open Minneapolis](images/parks_ECR_nobuildings-01.png)
+
+Despite high levels of park access across Minneapolis, there are few parks accessible by walking or rolling from the site. Those that are accessible are small in size.
 
 ### Bluespots
 
 ![Bluespots around the former Kmart site. Data source: Metropolitan Council](images/flood_pixely_draft.png)
 
+Identifying bluespots, or areas where water is most likely to pool in heavy rain events, informed our site plan layout. We sited more permeable surfaces in these existing bluespots.
+
 ### Transit Around the Site
 
-![Transit availability around the site. Data source:](images/transit_draft.png)
+![Transit availability around the site. Data source: Minnesota Geospatial Commons / Metropolitan Council](images/transit_draft.png)
+
+Access to numerous transit routes, including one existing and one future bus rapid transit line, is a major strength of area.
 
 # Armitage Avenue Corridor
+
+These maps were produced from an informal study of the Armitage Avenue corridor in Logan Square during fall 2023 for a course on spatial planning. Some maps rely on underlying quantitative data, and some draw from my own experiences observing and participating in corridor activities.
 
 ### Activity Map
 
@@ -48,8 +56,12 @@ Unlike other maps on this page, this map originated in SketchUp and was processe
 
 ### Traffic Flows
 
-![](images/trafficflow.png)
+![Data source: Illinois Department of Transportation Average Annual Daily Traffic](images/trafficflow.png)
+
+The corridor sees lower average annual daily vehicle users than nearby corridors.
 
 ### Land Use Along the Corridor
 
-![](images/spatial%20blobfinal-01.png)
+![Data source: Chicago Metropolitan Agency for Planning 2018 Land Use Inventory](images/spatial%20blobfinal-01.png)
+
+This map is a playful take on a land use map and was created by roughly tracing over a feature class of land uses along the corridor.
