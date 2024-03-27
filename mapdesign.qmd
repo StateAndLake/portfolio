@@ -1,3 +1,25 @@
 ---
 title: "Map Design"
 ---
+
+*I created most of these maps in ArcGIS Pro and processed them in Illustrator for projects throughout my master's of urban planning and policy program.*
+
+# Illinois Medical District
+
+![Land use map of the Illinois Medical District, 2023](images/landuse_FINAL_landusemap.png)
+
+![Transit routes and ridership in the Illinois Medical District, 2023](images/transit_imdIfinal.png)
+
+# New Nicollet
+
+![](images/parks_ECR_nobuildings-01.png)
+
+![](images/flood_pixely_draft.png)
+
+![](images/transit_draft.png)
+
+# Armitage Avenue Corridor
+
+![](images/activitymap-01.png)
+
+![](images/trafficflow.png)
