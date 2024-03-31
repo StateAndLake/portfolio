@@ -19,9 +19,11 @@ about:
 
 # Work Experience
 
-#### Geographic Information Systems Intern [(June 2023 - Present)]{.smallcaps}
+### Geographic Information Systems Intern 
 
 ##### *Chicago Metropolitan Agency for Planning \| Chicago, IL*
+
+##### [June 2023 - Present]{.smallcaps}
 
 -   Expedite data processing through automation using ArcPy to produce data informing regional forecasts
 
@@ -31,9 +33,11 @@ about:
 
 -   Support quality assurance and quality control processes for geospatial datasets
 
-#### Geographic Information Systems Teaching Assistant [(August 2022 - Present)]{.smallcaps}
+### Geographic Information Systems Teaching Assistant 
 
 ##### *Urban Data Visualization Lab, University of Illinois Chicago College of Urban Planning and Public Affairs \| Chicago, IL*
+
+##### [August 2022 - Present]{.smallcaps}
 
 -   Assist with GIS tutorials for 7 UIC courses and professional trainings and grade coursework over the course of 4 semesters
 
@@ -43,9 +47,11 @@ about:
 
 -   Give lectures and demonstrations using Illustrator, ArcGIS Pro, and ArcGIS Online
 
-#### Lead for North Carolina Fellow [(August 2021 - June 2022)]{.smallcaps}
+### Lead for North Carolina Fellow 
 
 ##### *County of Hyde \| Swan Quarter, NC*
+
+##### [August 2021 - June 2022]{.smallcaps}
 
 -   Administered \$100,000 grant to provide urgent housing repairs to 10 low-income households with elderly or disabled members, ensuring timely and compliant completion of project to maintain county eligibility for program
 
@@ -53,9 +59,11 @@ about:
 
 -   Wrote updates to Code of Ordinances based on community feedback and presented proposed changes to the Hyde County Board of Commissioners
 
-#### Davidson Impact Fellow ([July 2020 - June 2021]{.smallcaps})
+### Davidson Impact Fellow 
 
 ##### *Arts & Science Council \| Charlotte, NC*
+
+##### [July 2020 - June 2021]{.smallcaps}
 
 -   Collaborated on the design, management, and execution of CARES grants to distribute over \$1,000,000 to over 50 arts and cultural organizations and 123 individual creatives
 
@@ -67,17 +75,21 @@ about:
 
 # Education
 
-#### Master of Urban Planning and Policy [(Expected May 2024)]{.smallcaps}
+### Master of Urban Planning and Policy 
 
 ##### *University of Illinois Chicago, College of Urban Planning and Public Affairs \| Chicago, IL*
+
+##### [Expected May 2024]{.smallcaps}
 
 -   Coursework in GIS, R, Illustrator, InDesign, SketchUp, planning for climate change, spatial design, and plan-making
 
 -   GPA: 4.0
 
-#### Bachelor of Arts in Environmental Studies [(May 2020)]{.smallcaps}
+### Bachelor of Arts in Environmental Studies 
 
 ##### *Davidson College \| Davidson, NC*
+
+##### [May 2020]{.smallcaps}
 
 -   Coursework in GIS, environmental studies, calculus, and digital art
 
@@ -87,7 +99,7 @@ about:
 
 # Awards
 
-#### 2024 American Planning Association Student Planning and Design Competition Finalist
+### 2024 American Planning Association Student Planning and Design Competition Finalist
 
 -   Co-led a team to produce a proposal for redeveloping a former Kmart lot in Minneapolis, Minnesota as part of a national planning and design competition
 
