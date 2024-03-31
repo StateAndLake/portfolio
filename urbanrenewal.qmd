@@ -20,7 +20,7 @@ As part of the American Planning Association 2024 Student Planning and Design Co
 
 The City of Minneapolis approved the termination of the Kmart lease in 2020 with the goal of reconnecting Nicollet. This GIF illustrates how disruptive both the construction of Interstate 35W and the development of the Kmart was to the urban tissue of the neighborhood.
 
-View more of my work on this project here.
+View more of my work on this project [here](https://emiller1031.github.io/portfolio/nicollet.html).
 
 ![](images/nicollet_gif.gif)
 
