@@ -26,7 +26,7 @@ website:
       - text: "Writing"
         menu: 
           - lfnc.qmd
-          - evanston.qmd
+          - greenways.qmd
       - text: "Animation"
         menu: 
           - urbanrenewal.qmd
