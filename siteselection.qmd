@@ -2,7 +2,7 @@
 title: "GIS Approach to Siting Affordable Housing Developments: A Suitability Index"
 ---
 
-*This project was completed in Fall of 2023 for an intermediate GIS course. I undertook this project in a group, but I developed the project methods, produced the flowchart using Illustrator, and was responsible for 50% of the write-up, data analysis, and StoryMap. I have included the final map on this site using RShiny, but [the StoryMap can be viewed here](https://storymaps.arcgis.com/stories/932381da2b374fb4afcdc0be675b981d).*
+*This project was completed in Fall of 2023 for an intermediate GIS course. I undertook this project in a group, but I developed the project methods, produced the flowchart using Illustrator, and was responsible for 50% of the write-up, data analysis, and StoryMap. I used R and Python to join assessed land value to a shapefile of parcels in Cook County and clip it to the City of Chicago. I encourage you to view [the StoryMap can be viewed here](https://storymaps.arcgis.com/stories/932381da2b374fb4afcdc0be675b981d) to interact with the maps and learn more about the effort.*
 
 ## Introduction
 
@@ -14,4 +14,68 @@ We are not so much interested in the natural distribution of affordable housing 
 
 ## Methods
 
-![](images/methods%20flowchart.png)
+![](images/methods%20flowchart.png){width="1920"}
+
+# Results
+
+Our final index raster produced a map with a concentration of higher index values on the South and West sides of Chicago. However, due to our 90 feet by 90 feet raster cell size, the final result is at a such a granular scale—almost at parcel scale. This results in a valuable output as although we could have predicted what regions or even neighborhoods of the city are likely to be identified, this map can be used with much greater accuracy for site selection.
+
+![](images/siteselection.png){width="1000"}
+
+[![Screenshot of interactive StoryMap of our final suitability raster](images/clipboard-1555021311.png)](https://storymaps.arcgis.com/stories/932381da2b374fb4afcdc0be675b981d)
+
+# Limitations
+
+This project was only able to incorporate spatial data. As such, it could not reflect the other factors of producing affordable housing that are not spatially dependent, such as the remainder of the funding sources beyond TIF districts and Enterprise Zones. Therefore, this suitability index can only be used as a tool to identify the optimal locations for affordable housing in Chicago but not predict where they are likely to be developed.
+
+Furthermore, several critical datasets rely on somewhat outdated information. Vacant land relies on the Chicago Metropolitan Agency for Planning’s Land Use Inventory, which has yet to be updated past 2018. Assessed land values are derived from a dataset from 2019, though all Cook County properties have received a new assessment since then. The 2019 dataset was selected because of the ability to join the shapefile to the assessed values table.
+
+Above all, areas with low scores on this index should not be excluded from affordable housing site selection processes; we advocate for the widespread development for housing that fits the needs of communities. This tool can merely suggests where the ideal locations for such development might be.
+
+# Future Research
+
+This suitability index is intended as the first step for affordable housing developers and city officials to prioritize where new developments should be built. This does not distinguish the various types of affordable housing that exist, such as supportive housing versus senior. It also does not specify the target demographics in terms of percent of Area Median Income (beyond the 60% threshold), which will affect the relative placement as well as the funding that can be obtained.
+
+This map should be used in conjunction with a view of the existing affordable housing supply in Chicago to take current supply into account. We envision this tool being used as the first step in a broader analysis of the housing landscape of Chicago to determine where affordable housing should be placed.
+
+# References
+
+Chicago Data Portal, CPS Elementary Schools, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Data Portal, Enterprise Zones, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Data Portal, Grocery Stores, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Data Portal, Health Clinics, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Data Portal, Parks, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Data Portal, TIF Boundaries, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Data Portal, Train Stops, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Data Portal, Zoning, https://data.cityofchicago.org, accessed November 20, 2023. 
+
+Chicago Metropolitan Agency for Planning, 2018 Land Use Inventory, https://www.cmap.illinois.gov/land-use/inventory, accessed November 20, 2023. 
+
+Cook County Assessor’s Office, Assessor - Assessed Values, https://datacatalog.cookcountyil.gov, accessed November 20, 2023.
+
+Decision Support System for Affordable Housing.” In 2009 4th International Conference on Computer Science &Education, 1110–15. https://doi.org/10.1109/ICCSE.2009.5228554.
+
+“Housing.” City of Chicago, City of Chicago, www.chicago.gov/city/en/sites/block-builder/home/Housing.html. Accessed 1 Dec. 2023.
+
+“Incentives Checker.” Chicago Cityscape, Chicago Cityscape,www.chicagocityscape.com/features/incentiveschecker.php. Accessed 1 Dec. 2023.
+
+Ionescu, Diana. “Federal Loan Programs Offer Billions for TOD.” Planetizen News, Planetizen News, 17 Nov. 2023, www.planetizen.com/news/2023/11/126402-federal-loan-programs-offer-billions-tod.
+
+Poholka, Holli. 2011. Locating Optimal Affordable Housing Sites : A Determination of Potential
+
+Site Locations for New Affordable Housing Units Using Multi-Criteria Analysis: A Case Study of Kelowna, British Columbia. https://urn.kb.se/resolve?urn=urn:nbn:se:hig:diva-9774.
+
+Thomson, Curtis N, and Perry Hardin. 2000. “Remote Sensing/GIS Integration to Identify Potential Low-Income Housing Sites.” Cities 17 (2): 97–109. https://doi.org/10.1016/S0264-2751(00)00005-6.
+
+U.S. Census Bureau, American Community Survey, 5-Year Estimates for 2017 through 2021, Table B19013 (Median After Tax Income), http://data.census.gov, accessed November 20, 2023. 
+
+U.S. Census Bureau, American Community Survey, 5-Year Estimates for 2017 through 2021, Table B25071 (Ratio of Median Rent to Median Income), http://data.census.gov, accessed November 20, 2023. 
+
+Zhang, Zuo, Yanzhong Liu, Jiangfeng Li, and Biao Chen. 2009. “Application of GIS and Spatial

@@ -18,7 +18,6 @@ website:
           - networkanalyst.qmd
           - spatialanalyst.qmd
           - mapdesign.qmd
-          - capstone.qmd
       - text: "Urban Design"
         menu:
           - nicollet.qmd
@@ -26,8 +25,8 @@ website:
           - encuentro.qmd
       - text: "Writing"
         menu: 
-          - evanston.qmd
           - lfnc.qmd
+          - evanston.qmd
       - text: "Animation"
         menu: 
           - urbanrenewal.qmd
