@@ -19,7 +19,7 @@ about:
 
 # Work Experience
 
-### Geographic Information Systems Intern 
+### Geographic Information Systems Intern
 
 ##### *Chicago Metropolitan Agency for Planning \| Chicago, IL*
 
@@ -33,7 +33,7 @@ about:
 
 -   Support quality assurance and quality control processes for geospatial datasets
 
-### Geographic Information Systems Teaching Assistant 
+### Geographic Information Systems Teaching Assistant
 
 ##### *Urban Data Visualization Lab, University of Illinois Chicago College of Urban Planning and Public Affairs \| Chicago, IL*
 
@@ -47,7 +47,7 @@ about:
 
 -   Give lectures and demonstrations using Illustrator, ArcGIS Pro, and ArcGIS Online
 
-### Lead for North Carolina Fellow 
+### Lead for North Carolina Fellow
 
 ##### *County of Hyde \| Swan Quarter, NC*
 
@@ -59,7 +59,7 @@ about:
 
 -   Wrote updates to Code of Ordinances based on community feedback and presented proposed changes to the Hyde County Board of Commissioners
 
-### Davidson Impact Fellow 
+### Davidson Impact Fellow
 
 ##### *Arts & Science Council \| Charlotte, NC*
 
@@ -75,7 +75,7 @@ about:
 
 # Education
 
-### Master of Urban Planning and Policy 
+### Master of Urban Planning and Policy
 
 ##### *University of Illinois Chicago, College of Urban Planning and Public Affairs \| Chicago, IL*
 
@@ -85,7 +85,7 @@ about:
 
 -   GPA: 4.0
 
-### Bachelor of Arts in Environmental Studies 
+### Bachelor of Arts in Environmental Studies
 
 ##### *Davidson College \| Davidson, NC*
 
