@@ -22,6 +22,6 @@ The City of Minneapolis approved the termination of the Kmart lease in 2020 with
 
 View more of my work on this project [here](https://emiller1031.github.io/portfolio/nicollet.html).
 
-![](images/nicollet_gif.gif)
+![](images/gif_animate_shorter_medium.gif)
 
 *This GIF was produced in Photoshop using a combination of historic aerial imagery from the University of Minnesota and images from Google Earth.*
