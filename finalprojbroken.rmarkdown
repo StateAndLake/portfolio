@@ -1,12 +1,10 @@
 ---
 title: "Anticipating Climate Migration"
 subtitle: "Housing Density, Water Resources, and Water Hazards in Cook County, Illinois"
-format:
-  html:
-    code-fold: true
 ---
 
-*I completed this data analysis project using R for a course in fall of 2023. My project partner aggregated the flood susceptibility index scores to the municipal level in GIS, but the writing and data analysis included here are my own.*
+
+*I completed this data analysis project using R for a course in fall of 2023. My project partner aggregated the flood susceptibility index scores to the municipal level in GIS, but the writing and data analysis included here is my own.*
 
 # Project Context
 
@@ -18,7 +16,7 @@ To plan for this context, cities must consider both the allocation of water reso
 
 We expect these variables to be correlated because of existing literature on the matter. Sampson et al (2022) found that increasing density may result in "uneven, nonlinear efficiency gains in water use." However, increasing housing density may have "adverse effects" on flood risk, though other land use patterns associated with high density (such as impervious surfaces) could also help explain the relationship (Son et al 2023).
 
-The findings of this report could inform zoning policy moving forward. Suburban Cook County is associated with a higher frequency of single family detached housing (ie, lower density), whereas the City of Chicago and inner-ring suburbs are characterized by higher density housing types, such as multi-family housing or townhouses. Zoning is the underlying law dictating what types of housing are allowed to be built where, and many suburban mnicipalities are restrctive of where multi-family housing can be placed.
+The findings of this report could inform zoning policy moving forward. Suburban Cook County is associated with a higher frequency of single family detached housing (ie, lower density), whereas the City of Chicago and inner-ring suburbs are characterized by higher density housing types, such as multi-family housing or townhouses. Zoning is the underlying law dictating what types of housing are allowed to be built where, and many suburban municipalities are restrictive of where multi-family housing can be placed.
 
 Both relationships may vary depending upon the local context in which they are investigated. We hope to contribute to the literature investigating the relationship between housing density and water resources and hazards as well as identify target municipalities for water conservation projects, flood mitigation efforts, and denser housing developments. Such policies will help the region prepare to receive climate migrants while simultaneously addressing its own concerns due to climate change.
 
@@ -40,6 +38,7 @@ Our data comes from the Chicago Metropolitan Agency for Planning (CMAP) and the 
 
 ## Load libraries & Set Working Directory
 
+
 ```{r, message = F, warning = F}
 library(tidyverse)
 library(gt)
@@ -50,7 +49,9 @@ library(ggthemes)
 setwd(".")
 ```
 
+
 ## Bring data into R
+
 
 ```{r, message = F}
 housing <- read_csv("housing_density.csv")
@@ -59,6 +60,7 @@ cook_munis <- read_csv("Cook_County_Municipalities.csv")
 housingdensity_2020 <- read_csv("housingdensity2020.csv")
 fsi_score <- read_csv("CMAP_FSI.csv")
 ```
+
 
 ## Tidy Data
 
@@ -69,6 +71,7 @@ In this dataset, values after 2013 are projections. Projections were revised in 
 Documentation from CMAP indicates that the towns of Inverness, South Barrington, Barrington Hills, Orland Hills, and Deer Park were omitted from the dataset because they either did not have a municipal-scale community water supply system or had other complications with the service area that required exclusion from the data. Justice and Willow Springs were combined in the CMAP dataset.
 
 We too will exclude Inverness, South Barrington, Barrington Hills, Orland Hills, and Deer Park from our analysis as well because their water supply system differs so significantly from the rest of the dataset. Before joining the CMAP dataset to the list of municipalities in Cook County, we will change the name of "Justice" to match the "Justice-Willow Springs" entry in the CMAP dataset. We will have to do the same for the updated housing density table and will average the 2020 housing densities of the two towns.
+
 
 ```{r, results = 'hide', message = F}
 cook_munis <- cook_munis %>%
@@ -93,7 +96,9 @@ housingdensity2020<- housingdensity_2020 %>%
  
 ```
 
+
 At this point, we will rename the housing_density column to "2020" to match the column formatting for the housing and wateruse tibbles. For the housing tibble, we will select columns of interest, rename any confusing column titles, and join the updated 2020 housing density dataset to the existing housing tibble.
+
 
 ```{r, message = F, results = 'hide'}
 
@@ -113,9 +118,11 @@ housing1 %>%
 
 ```
 
+
 We have no missing values because of our decision to exclude municipalities that CMAP also excluded due to the communities' distinct nature from the rest of Cook County. This is a limitation of our research.
 
 We will use the "pivot_longer" function to create a new column, year, because year is also a variable in our dataset, so it requires its own column.
+
 
 ```{r, results='hide'}
 housing1 <- housing1 %>%  
@@ -135,14 +142,18 @@ cook_housing %>%
   filter(if_any(everything(), ~is.na(.))) # 6 NAs - but it's okay
 ```
 
+
 6 NAs remain. However, the only missing values are the ones we have already determined must be omitted, or have already been aggregated with another municipality, so at this point, we are comfortable removing all NAs.
+
 
 ```{r}
 cook_housing <- cook_housing %>%
   filter(!if_any(everything(), ~is.na(.)))
 ```
 
+
 Note that for each city, an entry exists for years 2000-2013, 2015, and 2020. Here is a preview of the data table just for the City of Chicago (the full table with all Cook County municipalities contains 2048 observations):
+
 
 ```{r, echo=FALSE}
 cook_housing %>%
@@ -160,6 +171,7 @@ tab_header(title = html("<b> Housing Density <b>"),
   opt_align_table_header(align = "left")
 ```
 
+
 ### Water Withdrawal - Gallons per capita per day (GPCD)
 
 In this dataset, values after 2013 are projections. Projections were revised in 2019 based on emerging data. We do not want to include too many projections in our analysis, so we will filter out years greater than 2020. There is no updated data that will supplement this data, unfortunately.
@@ -167,6 +179,7 @@ In this dataset, values after 2013 are projections. Projections were revised in 
 We can proceed with using pivot_longer as we did with the housing tibble so that year has its own column and renaming confusing column titles. We can join the water usage dataset to the table of Cook County municipalities to keep only observations within Cook County.
 
 To tidy the data further, we will select only columns of interest to us. We then check for NAs.
+
 
 ```{r, message = FALSE, results = 'hide'}
 water1 <-
@@ -188,7 +201,9 @@ cook_water %>%
 
 ```
 
+
 Note that for each city, an entry exists for years 2000-2013, 2015, and 2020. Here is a preview of the data table just for the City of Oak Park (the actual table has 2,048 observations):
+
 
 ```{r}
 cook_water %>%
@@ -207,9 +222,11 @@ cook_water %>%
   opt_align_table_header(align = "left")
 ```
 
+
 ### Flood Susceptibility Index (FSI)
 
 The Flood Susceptibility Index (FSI) is used to "identify priority areas across the region for flood mitigation activities" according the documentation on CMAP's website. The data has been aggregated to average FSI score at the municipal level. We will remove unwanted columns from the table.
+
 
 ```{r}
 fsi_score <- fsi_score %>%
@@ -218,7 +235,9 @@ fsi_score <- fsi_score %>%
          -OBJECTID) 
 ```
 
+
 The nature of the data has included unincorporated areas in Cook County. We will filter out these areas, as we are only interested in incorporated municipalities with control over their own zoning codes.
+
 
 ```{r, message = FALSE, results = 'hide'}
 str_view(fsi_score$agency_des, "TWP")
@@ -230,7 +249,9 @@ fsi_score <- fsi_score %>%
          FSI = MEAN)
 ```
 
-From a glance, we can see that there are duplicates in the data. This is sometimes typical with GIS data brought into R -- for whatever reason, shapefiles may have duplicate entries for the same place if geomteries are non-contiguous (ie - if a municipality is on the border of Cook County, it might get cut up into pieces when removing the portions not in Cook County). Now, we will look at duplicates to assess how to deal with them.
+
+From a glance, we can see that there are duplicates in the data. This is sometimes typical with GIS data brought into R -- for whatever reason, shapefiles may have duplicate entries for the same place if geometries are non-contiguous (ie - if a municipality is on the border of Cook County, it might get cut up into pieces when removing the portions not in Cook County). Now, we will look at duplicates to assess how to deal with them.
+
 
 ```{r, results='hide'}
 fsi_score %>%
@@ -239,25 +260,31 @@ fsi_score %>%
   ungroup()
 ```
 
+
 The aggregated FSI is identical among any duplicate instances, so at this point, we can remove duplicates.
+
 
 ```{r}
 fsi_score <- fsi_score %>%
   distinct()
 ```
 
+
 Now, we can check for missing values in the data.
+
 
 ```{r, message=FALSE, results='hide'}
 fsi_score %>%
   filter(if_any(everything(), ~is.na(.))) # there are 0
 ```
 
+
 All datasets seem tidy at this point, because each variable has its own column, each row is an observation, and each value has its own cell.
 
 **The unit of observation for cook_water and cook_housing is municipality in Cook County by year. Each observation now has its own row. The unit of observation for the flood susceptibility index is municipality in Cook County. The FSI was devised in 2018 but is meant to be a long-term guide for flood mitigation efforts that indicates long ranging trends in the area, not a point-in-time dataset.**
 
 At this point, we can join the data that have matching units of observation. We will also ensure that the "year" column is being treated as a number.
+
 
 ```{r}
 cook_water_housingdensity <- full_join(cook_housing, cook_water,
@@ -270,7 +297,9 @@ cook_water_housingdensity <-
   
 ```
 
+
 We will also join housing density in the county for 2020 to the flood susceptibility index to investigate current conditions regarding flood risk and housing density.
+
 
 ```{r}
 housing_FSI_2020 <- 
@@ -285,9 +314,11 @@ housing_FSI_2020 <-
   mutate(year = 2020)
 ```
 
+
 We have also checked for missing values and determined how to address them. We may now explore the data before moving onto visualizing the results.
 
 **Here is a "snapshot" of the residential water usage and housing density dataset, arranged in descending order regardless of year by residential daily water usage, noting that values for average gallons of water withdrawn per capita per day are projections after 2013:**
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -308,9 +339,11 @@ cook_water_housingdensity %>%
   opt_align_table_header(align = "left")
 ```
 
+
 Robbins and Glenview consistently use the highest amount of water per capita per day.
 
 **Here is a table visualizing part of the housing density and FSI dataset (municiaplities with the highest 10 average FSIs are at the top):**
+
 
 ```{r}
 housing_FSI_2020 %>%
@@ -339,11 +372,13 @@ cook_water_housingdensity %>%
   distinct() # 128 grouped municipalities
 ```
 
+
 The FSI dataset contains all municipalities in Cook County, while some had to be omitted from the water usage and housing density dataset (as discussed above). This accounts for the discrepancies in dimensions.
 
 ## Creating a theme
 
 We will create a theme to standardize our visualizations.
+
 
 ```{r}
 theme_hm <- function(){ 
@@ -389,9 +424,11 @@ theme_hm <- function(){
 }
 ```
 
+
 # Exploring the Data
 
 ## Density and Water
+
 
 ```{r, results = 'hide'}
 cook_water_housingdensity %>%
@@ -432,7 +469,9 @@ cook_water_housingdensity %>%
 # SD for housing density - 1045
 ```
 
-Bedford Park has the lowest housing density throughout the 20 year period, occurring in 2011 and 2020. Oak Park has the highest density of the dataset in 2020. Robbins had the highest residential water usage per capita in 2000, and Homer Glen was reportedly the lowest in 2000, but this was before the municipality was incorporated in 2001. Based on the IQR and standard deviation, it seems like this dataset may have a lot of outliers, particluarly for the housing density variable.
+
+Bedford Park has the lowest housing density throughout the 20 year period, occurring in 2011 and 2020. Oak Park has the highest density of the dataset in 2020. Robbins had the highest residential water usage per capita in 2000, and Homer Glen was reportedly the lowest in 2000, but this was before the municipality was incorporated in 2001. Based on the IQR and standard deviation, it seems like this dataset may have a lot of outliers, particularly for the housing density variable.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -470,7 +509,9 @@ cook_water_housingdensity %>%
   theme_hm()
 ```
 
+
 Daily residential water usage per capita from 2000 - 2020 is relatively normal, but skewed right.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -483,7 +524,9 @@ cook_water_housingdensity %>%
   theme_hm()
 ```
 
+
 This dataset has an irregular distribution. This reflects the diverse forms that municipalities within Cook County take -- some are much more dense than others. We will also use box plots to visualize outliers.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -495,7 +538,9 @@ cook_water_housingdensity %>%
   theme_hm()
 ```
 
+
 Lots of outliers on both the high and low end of the graph for residential daily water use.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -507,11 +552,13 @@ cook_water_housingdensity %>%
   theme_hm()
 ```
 
+
 Only outliers on the upper end of the spectrum, but there are quite a few.
 
 We are not concerned about the outliers in the data because they are indicative of the wide range of environments in Cook County.
 
 ### Density and Water Summary Statistics Grouped by Municipality
+
 
 ```{r, echo=FALSE}
 cook_water_housingdensity %>%
@@ -543,7 +590,9 @@ cook_water_housingdensity %>%
 
 ```
 
+
 This table groups values by municipality. The table is sorted in descending order on average daily residential water use per capita. Understandably, there is lower variation within data from the same city, but it is interesting to consider cities with high standard deviations like Hometown, Posen, or Berwyn.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -563,7 +612,9 @@ cook_water_housingdensity %>%
 
 ```
 
+
 This plot is very similar to the original, ungrouped density plot for this variable. It is skewed right.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -582,7 +633,9 @@ cook_water_housingdensity %>%
   theme_hm()
 ```
 
+
 This is somewhat similar to the ungrouped density plot, but this "smooths out" the curve on the left of the plot. It is approaching a normal distribution but is still skewed right.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -602,7 +655,9 @@ cook_water_housingdensity %>%
 
 ```
 
+
 There is about the same distribution of outliers for residential daily water use when grouped by municipality.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -621,80 +676,11 @@ cook_water_housingdensity %>%
   theme_hm()
 ```
 
+
 Again, this very similar to the ungrouped distribution of data and outliers for housing density.
 
-### Density and Water Summary Statistics Grouped by Year
-
-```{r}
-cook_water_housingdensity %>%
-  group_by(year) %>%
-  summarize(avgwater = round(mean(gpcd), 2),
-            avgdensity = round(mean(units_per_sqmile), 0),
-            medianwater = round(median(gpcd), 2),
-            mediandensity = round(median(units_per_sqmile), 0),
-            SDwater = round(sd(gpcd), 2),
-            SDdensity = round(sd(units_per_sqmile), 2)) %>%
-  arrange(year) %>%
-  gt() %>%
-  cols_label(
-    year = "Year",
-    avgwater = html("Average Gallons of Water Withdrawn <br> Per Capita Per Day (GPCD)"),
-    avgdensity = html("Average Housing Units <br> Per Square Mile"),
-    medianwater = "Median Gallons of Water Withdrawn Per Capita Per Day",
-    mediandensity = html("Median Housing Units <br> Per Square Mile"),
-    SDwater = html("Standard Deviation <br> Water Usage"),
-    SDdensity = html("Standard Deviation <br> Housing Density")
-  ) %>%
-  tab_source_note(source_note = html("<i>Source: Chicago Metropolitan Agency for Planning (CMAP), ON TO 2050 Regional Water Demand Forecast <br> US Census Bureau, 2020 Decennial Census, table H1<i>")) %>%
-  tab_source_note(source_note = md("*Note: GPCD values after 2013 are projected*")) %>%
-  tab_options(column_labels.background.color = "skyblue") %>%
-  tab_header(title = html("<b> Summary Statistics <br> Housing Density & Residential Water Withdrawal by Year<b>"),
-             subtitle = html("<i> Average from 2000 - projected 2020, Cook County, IL <i> ")) %>%
-  opt_align_table_header(align = "left")
-
-```
-
-This table provides summary statistics by year for the dataset.
-
-```{r}
-cook_water_housingdensity %>%
-  group_by(year) %>%
-  summarize(avgwater = round(mean(gpcd), 2),
-            avgdensity = round(mean(units_per_sqmile), 0),
-            medianwater = round(median(gpcd), 2),
-            mediandensity = round(median(units_per_sqmile), 0),
-            SDwater = round(sd(gpcd), 2),
-            SDdensity = round(sd(units_per_sqmile), 2)) %>%
- ggplot() +
-  geom_density(aes(x = avgwater)) +
-  labs(x = "Daily Residential Water Usage Per Capita",
-       title = "Density Plot: Average Daily Residential Water \n Usage in Gallons Per Capita Per Day (GPCD)",
-       subtitle = "Grouped by Year in Cook County, IL, 2000 - 2020") +
-  theme_hm()
-```
-
-Grouping values by year makes the density plot skew right.
-
-```{r}
-cook_water_housingdensity %>%
-  group_by(year) %>%
-  summarize(avgwater = round(mean(gpcd), 2),
-            avgdensity = round(mean(units_per_sqmile), 0),
-            medianwater = round(median(gpcd), 2),
-            mediandensity = round(median(units_per_sqmile), 0),
-            SDwater = round(sd(gpcd), 2),
-            SDdensity = round(sd(units_per_sqmile), 2)) %>%
- ggplot() +
-  geom_density(aes(x = avgdensity)) +
-  labs(x = "Housing Units per Square Mile",
-       title = "Density Plot: Average Housing Units \n Per Square Mile",
-       subtitle = "Grouped by Year in Cook County, IL, 2000 - 2020") +
-  theme_hm()
-```
-
-Very funky distribution!
-
 ### Flood Susceptibility Index
+
 
 ```{r}
 housing_FSI_2020 %>%
@@ -725,7 +711,9 @@ housing_FSI_2020 %>%
   opt_align_table_header(align = "left")
 ```
 
+
 This table provides summary statistics for the Flood Susceptibility Index. Hometown has the highest Flood Susceptibility Index aggregated score at 9.96, and Homer Glen has the lowest at 1.63.
+
 
 ```{r, results='hide'}
 view(housing_FSI_2020 %>%
@@ -742,7 +730,9 @@ housing_FSI_2020 %>%
   theme_hm()
 ```
 
+
 Flood susceptibility index scores are skewed to the left, meaning that most municipalities have higher FSI scores.
+
 
 ```{r}
 housing_FSI_2020 %>%
@@ -754,9 +744,11 @@ housing_FSI_2020 %>%
   theme_hm()
 ```
 
+
 Surprisingly, there is 1 outlier on the lower end of the dataset. This is surprising because the Flood Susceptibility Index is a scale, so one may expect that the data would have a normal distribution. However, this score makes sense for Homer Glen. The city is far from the lake, and a nature preserve makes up a significant portion of its land, likely having flood mitigation impacts.
 
 # Data Visualizations
+
 
 ```{r, message = F, warning=FALSE}
 cook_water_housingdensity %>%
@@ -776,7 +768,9 @@ cook_water_housingdensity %>%
   theme_hm()
 ```
 
+
 Residential withdrawals of gallons of water per day has been decreasing on average across the county from 2000 to 2013, and this trend is projected to continue into 2020. The steepest decline begins around 2007. The highest average GPCD was 96.99 and occurred in 2005.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -806,7 +800,9 @@ cook_water_housingdensity %>%
 )
 ```
 
+
 The lowest GPCD is the projected value for 2020 at 65.55 GPCD. The lowest actual value was 77.23 GPCD in 2013. For context, the national average daily residential per capita water use in 2015 was 83 GPCD. In 2015, it is estimated that the Cook County region was below the national figure.
+
 
 ```{r, message=FALSE}
 cook_water_housingdensity %>%
@@ -827,7 +823,9 @@ cook_water_housingdensity %>%
  
 ```
 
+
 The relationship between housing units per square mile and time is less straightforward than the change over time of residential water withdrawals. Housing density has remained somewhat stagnant from 2000 to 2020 with slight increases over the time period.
+
 
 ```{r}
 cook_water_housingdensity %>%
@@ -856,7 +854,9 @@ cook_water_housingdensity %>%
 )
 ```
 
+
 The lowest average housing density, 1666 units per square mile, occurred in 2007. The highest average housing density, 1732 units per square mile, occurred in 2012. Housing density has decreased slightly from 2012 to 2020. 2020 has about the same average housing density as 2010.
+
 
 ```{r, message = F}
 cook_water_housingdensity %>%
@@ -866,7 +866,7 @@ cook_water_housingdensity %>%
             avg_water = mean(gpcd)) %>%
   ggplot(aes(x = avg_units,
               y = avg_water)) +
-    geom_point(color = "#233763") +
+    geom_point() +
    geom_smooth(color = "olivedrab4", se = F) +
   labs(x = html("Average Housing Units \n Per Square Mile"),
        y = "Average Residential \n GPCD Withdrawals",
@@ -877,14 +877,17 @@ cook_water_housingdensity %>%
   
 ```
 
+
 In Cook County, averaged across 2000 to 2020, as average housing units per square mile increase, average daily gallons of water per capita for residential uses decreases to a point. When housing units per square mile reach about 2,500, residential water use plateaus and begins to increase again around 3,500. This is to be expected. As noted in CMAP's documentation, "As housing density increases...average water use per dwelling unit decreases; in part due to smaller lot sizes and less outdoor irrigation," however, "small household sizes in higher density housing (counter-acting economies of scale in water use) and lack of individual meters in more dense housing" ("ON TO 2050 Regional Water Demand Forecast" 2018, 11).
+
 
 ```{r, message = F}
 housing_FSI_2020 %>%
   ggplot(aes(x = units_per_sqmile,
              y = FSI)) +
   geom_point(color = "goldenrod4") +
-  geom_smooth(color = "cadetblue", se = F) +
+  geom_smooth(color = "cadetblue",
+              se = F) +
   labs(x = html("Average Housing Units \n Per Square Mile"),
        y = "Flood Susceptibilty Index",
        title = "Housing Density and Average Flood \n Susceptibility Index Score by Municipality",
@@ -893,9 +896,11 @@ housing_FSI_2020 %>%
   theme_hm()
 ```
 
+
 Generally, areas with lower housing density score also experience lower flood risk in Cook County. However, there could be a number of other factors impacting flood risk, such as impervious surfaces, quality of stormwater infrastructure, and proximity to Lake Michigan.
 
 # Policy Recommendations
+
 
 ```{r, warning = FALSE, message = F}
 cook_water_housingdensity %>%
@@ -923,7 +928,9 @@ cook_water_housingdensity %>%
   
 ```
 
+
 There are 108 municipalities in Cook County that had housing densities less than 2,500 housing units per square mile in 2020. This table illustrates those of the 108 that have the 10 highest residential water usage values. These are the top-priority communities that should revise their zoning ordinances to accommodate higher housing densities in anticipation both of lower water availability and higher demand for housing as people move into the region.
+
 
 ```{r, warning = FALSE, message = F}
 cook_water_housingdensity %>%
@@ -949,7 +956,9 @@ cook_water_housingdensity %>%
     grand_summary_row.background.color = "gray")
 ```
 
+
 Regardless of density, above are the municipalities that must adopt plans for water conservation. Suburban Winnetka had the highest projected residential daily water usage for 2020. The list is nearly identical to the one for municipalities with densities less than 2,500 units per square mile (except for Chicago).
+
 
 ```{r, warning = FALSE, message = F}
 cook_water_housingdensity %>%
@@ -974,6 +983,7 @@ cook_water_housingdensity %>%
   tab_options(
     grand_summary_row.background.color = "gray")
 ```
+
 
 None of the municipalities with the 10 highest FSI scores also have high rates of residential daily water usage. In fact, the average of daily water usage per capita for these 10 municipalities, about 50.6, is only about 38% of the average daily water usage per capita for the top 10 municipalities by daily water usage. These are communities where green infrastructure projects should be prioritized.
 
@@ -1012,3 +1022,4 @@ Son, Cheol Hee, Chang Hwan Lee, and Yong Un Ban. 2023. "Analysis of the Impact a
 "Table H1: Housing Units." 2020 Decennial Census. United States Census Bureau. Accessed December 5, 2023.<https://data.census.gov/all?q=h1&g=050XX00US17031$1600000>.
 
 Wickham, Hadley, and Garrett Golemund. 2017. 12 Tidy Data \| R for Data Science.<https://r4ds.had.co.nz/tidy-data.html>.
+
