@@ -1,5 +1,8 @@
 ---
 title: "Greenway Access in Mecklenburg County"
+format: 
+  html:
+    toc: false
 ---
 
 *This is an excerpt from my undergraduate capstone at Davidson College on the distribution of greenways in Mecklenburg County, North Carolina. I used ArcGIS to investigate the socioeconomic characteristics of block groups within a half-mile of a greenway entrance. I found that there is a statistically significant relationship between proximity to greenways and the change in median property values, racial demographics, and median income of block groups in the county. Block groups that are within a half-mile of a greenway entrance are more likely to be predominantly white and affluent. The full document includes introduction, methods, results, discussion, and conclusion sections. This except is a portion from a section detailing the project's theoretical framework and historical context.*
@@ -36,7 +39,7 @@ Charlotte remained without an official city plan throughout the entire first hal
 
 From the 1930s to the 1970s, residential composition in Charlotte remained racially segregated but evolved into a crescent and wedge dynamic in which whiter, wealthier neighborhoods remained in a southeastern wedge sector extending into downtown, while working- and middle-class communities of color were relegated to a crescent sector (Hanchett 1998, 224; see Figure 1). Federal New Deal projects of the 1930s facilitated racial segregation, as local civic leaders concentrated the benefits in whiter and wealthier areas of the city (Hanchett 1998, 228). Redlining, discriminatory federal aid loans to homebuyers, urban renewal projects, and the construction of public housing away from the wedge of the city further segregated the city into a wedge and crescent (Hanchett 1998).
 
-![Figure 1. The Crescent and Wedge in Mecklenburg County courtesy of UNCC (Dunn 2017)](images/charlotte segregation.jpg)
+![Figure 1. The Crescent and Wedge in Mecklenburg County courtesy of UNCC (Dunn 2017)](images/charlotte%20segregation.jpg)
 
 Though the process of desegregation in Charlotte began in its parks during the 1960s, its schools remained segregated until the 1971 U.S. Supreme Court’s decision in *Swann v. Charlotte-Mecklenburg County Board of Education* required students to be bused “in order to achieve racial integration” (Ervin 2015; Hanchett 1998, 252). In 2001, however, the Fourth Circuit Court of Appeals sided with a white parent who sued the school district because “he believed his daughter was not admitted into a local magnet school because of her race” (Smith 2016). This ended the busing policy and reversed much of the desegregation efforts in the county (Smith 2016). Contemporary studies confirm that Mecklenburg County remains racially and economically segregated into a wealthy, white urban crescent and a racialized, low-income wedge bordered by wealthy, white suburbs in the northern part of the county (Garo, Allen-Handy, and Lewis 2018).
 
@@ -84,7 +87,7 @@ Though the “historical context” portion of the plan mentions the county’s 
 
 The plan does include considerations for socioeconomic status in equitable placement (Figure 2) but does not discuss the potential for the trail to alter the surrounding low-income neighborhoods through displacement of long-term residents (“Cross Charlotte Trail Master Plan” 2016, 26). Moreover, the maps in the plan do not consider racial demographics, further erasing segregation of the city.
 
-![Figure 2. Poverty Levels along the XCLT plan. From the Cross Charlotte Trail Master Plan, 2016](images/poverty xclt-01.png)
+![Figure 2. Poverty Levels along the XCLT plan. From the Cross Charlotte Trail Master Plan, 2016](images/poverty%20xclt-01.png)
 
 Though planners sought community input in devising the plan, the plan does not mention what recruitment methods were employed or how effective they were at reaching those most vulnerable to displacement.
 

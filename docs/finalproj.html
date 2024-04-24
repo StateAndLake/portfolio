@@ -259,7 +259,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Anticipating Climate Migration</h1>
-<p class="subtitle lead">Housing Density, Water Resources, and Water Hazards in Cook County, Illinois</p>
 </div>
 
 
@@ -302,8 +301,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-libraries-set-working-directory" class="level2">
 <h2 class="anchored" data-anchor-id="load-libraries-set-working-directory">Load libraries &amp; Set Working Directory</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtExtras)</span>
@@ -311,20 +308,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="bring-data-into-r" class="level2">
 <h2 class="anchored" data-anchor-id="bring-data-into-r">Bring data into R</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>housing <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"housing_density.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>wateruse <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"residential_water.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cook_munis <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Cook_County_Municipalities.csv"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>housingdensity_2020 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"housingdensity2020.csv"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fsi_score <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"CMAP_FSI.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="tidy-data" class="level2">
@@ -335,8 +328,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Documentation from CMAP indicates that the towns of Inverness, South Barrington, Barrington Hills, Orland Hills, and Deer Park were omitted from the dataset because they either did not have a municipal-scale community water supply system or had other complications with the service area that required exclusion from the data. Justice and Willow Springs were combined in the CMAP dataset.</p>
 <p>We too will exclude Inverness, South Barrington, Barrington Hills, Orland Hills, and Deer Park from our analysis as well because their water supply system differs so significantly from the rest of the dataset. Before joining the CMAP dataset to the list of municipalities in Cook County, we will change the name of “Justice” to match the “Justice-Willow Springs” entry in the CMAP dataset. We will have to do the same for the updated housing density table and will average the 2020 housing densities of the two towns.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cook_munis <span class="ot">&lt;-</span> cook_munis <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Municipality =</span> <span class="fu">ifelse</span>(Municipality <span class="sc">==</span> <span class="st">"Justice"</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Justice-Willow Springs"</span>,</span>
@@ -356,12 +347,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a> housingdensity2020 <span class="sc">%&gt;%</span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">filter</span> (NAME <span class="sc">==</span> <span class="st">"Justice-Willow Springs"</span>) <span class="co"># 1 row - ready to proceed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>At this point, we will rename the housing_density column to “2020” to match the column formatting for the housing and wateruse tibbles. For the housing tibble, we will select columns of interest, rename any confusing column titles, and join the updated 2020 housing density dataset to the existing housing tibble.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>housingdensity2020 <span class="ot">&lt;-</span> housingdensity2020 <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"2020"</span> <span class="ot">=</span> housing_density)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -375,13 +363,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>housing1 <span class="sc">%&gt;%</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">is.na</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>We have no missing values because of our decision to exclude municipalities that CMAP also excluded due to the communities’ distinct nature from the rest of Cook County. This is a limitation of our research.</p>
 <p>We will use the “pivot_longer” function to create a new column, year, because year is also a variable in our dataset, so it requires its own column.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>housing1 <span class="ot">&lt;-</span> housing1 <span class="sc">%&gt;%</span>  </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">"2000"</span><span class="sc">:</span><span class="st">"2015"</span>, <span class="st">"2020"</span>),  <span class="co"># use pivot longer to make "year" a variable</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"units_per_sqmile"</span>,</span>
@@ -397,37 +382,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>cook_housing <span class="sc">%&gt;%</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">is.na</span>(.))) <span class="co"># 6 NAs - but it's okay</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>6 NAs remain. However, the only missing values are the ones we have already determined must be omitted, or have already been aggregated with another municipality, so at this point, we are comfortable removing all NAs.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cook_housing <span class="ot">&lt;-</span> cook_housing <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">if_any</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">is.na</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Note that for each city, an entry exists for years 2000-2013, 2015, and 2020. Here is a preview of the data table just for the City of Chicago (the full table with all Cook County municipalities contains 2048 observations):</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="cblbwmihdi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cblbwmihdi table {
+<div id="ublxcmrmwv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ublxcmrmwv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cblbwmihdi thead, #cblbwmihdi tbody, #cblbwmihdi tfoot, #cblbwmihdi tr, #cblbwmihdi td, #cblbwmihdi th {
+#ublxcmrmwv thead, #ublxcmrmwv tbody, #ublxcmrmwv tfoot, #ublxcmrmwv tr, #ublxcmrmwv td, #ublxcmrmwv th {
   border-style: none;
 }
 
-#cblbwmihdi p {
+#ublxcmrmwv p {
   margin: 0;
   padding: 0;
 }
 
-#cblbwmihdi .gt_table {
+#ublxcmrmwv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -453,12 +434,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_caption {
+#ublxcmrmwv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cblbwmihdi .gt_title {
+#ublxcmrmwv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -470,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#cblbwmihdi .gt_subtitle {
+#ublxcmrmwv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -482,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#cblbwmihdi .gt_heading {
+#ublxcmrmwv .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -494,13 +475,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_bottom_border {
+#ublxcmrmwv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_col_headings {
+#ublxcmrmwv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -515,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_col_heading {
+#ublxcmrmwv .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -535,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#cblbwmihdi .gt_column_spanner_outer {
+#ublxcmrmwv .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -547,15 +528,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#cblbwmihdi .gt_column_spanner_outer:first-child {
+#ublxcmrmwv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cblbwmihdi .gt_column_spanner_outer:last-child {
+#ublxcmrmwv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cblbwmihdi .gt_column_spanner {
+#ublxcmrmwv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -567,11 +548,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#cblbwmihdi .gt_spanner_row {
+#ublxcmrmwv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cblbwmihdi .gt_group_heading {
+#ublxcmrmwv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -597,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#cblbwmihdi .gt_empty_group_heading {
+#ublxcmrmwv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -612,15 +593,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#cblbwmihdi .gt_from_md > :first-child {
+#ublxcmrmwv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cblbwmihdi .gt_from_md > :last-child {
+#ublxcmrmwv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cblbwmihdi .gt_row {
+#ublxcmrmwv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -639,7 +620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#cblbwmihdi .gt_stub {
+#ublxcmrmwv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -652,7 +633,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cblbwmihdi .gt_stub_row_group {
+#ublxcmrmwv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -666,15 +647,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#cblbwmihdi .gt_row_group_first td {
+#ublxcmrmwv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cblbwmihdi .gt_row_group_first th {
+#ublxcmrmwv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cblbwmihdi .gt_summary_row {
+#ublxcmrmwv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -684,16 +665,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cblbwmihdi .gt_first_summary_row {
+#ublxcmrmwv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_first_summary_row.thick {
+#ublxcmrmwv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cblbwmihdi .gt_last_summary_row {
+#ublxcmrmwv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -703,7 +684,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_grand_summary_row {
+#ublxcmrmwv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -713,7 +694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cblbwmihdi .gt_first_grand_summary_row {
+#ublxcmrmwv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -723,7 +704,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_last_grand_summary_row_top {
+#ublxcmrmwv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -733,11 +714,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_striped {
+#ublxcmrmwv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cblbwmihdi .gt_table_body {
+#ublxcmrmwv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -746,7 +727,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_footnotes {
+#ublxcmrmwv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -760,7 +741,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_footnote {
+#ublxcmrmwv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -769,7 +750,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cblbwmihdi .gt_sourcenotes {
+#ublxcmrmwv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -783,7 +764,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cblbwmihdi .gt_sourcenote {
+#ublxcmrmwv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -791,63 +772,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cblbwmihdi .gt_left {
+#ublxcmrmwv .gt_left {
   text-align: left;
 }
 
-#cblbwmihdi .gt_center {
+#ublxcmrmwv .gt_center {
   text-align: center;
 }
 
-#cblbwmihdi .gt_right {
+#ublxcmrmwv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cblbwmihdi .gt_font_normal {
+#ublxcmrmwv .gt_font_normal {
   font-weight: normal;
 }
 
-#cblbwmihdi .gt_font_bold {
+#ublxcmrmwv .gt_font_bold {
   font-weight: bold;
 }
 
-#cblbwmihdi .gt_font_italic {
+#ublxcmrmwv .gt_font_italic {
   font-style: italic;
 }
 
-#cblbwmihdi .gt_super {
+#ublxcmrmwv .gt_super {
   font-size: 65%;
 }
 
-#cblbwmihdi .gt_footnote_marks {
+#ublxcmrmwv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cblbwmihdi .gt_asterisk {
+#ublxcmrmwv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cblbwmihdi .gt_indent_1 {
+#ublxcmrmwv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cblbwmihdi .gt_indent_2 {
+#ublxcmrmwv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cblbwmihdi .gt_indent_3 {
+#ublxcmrmwv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cblbwmihdi .gt_indent_4 {
+#ublxcmrmwv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cblbwmihdi .gt_indent_5 {
+#ublxcmrmwv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -976,8 +957,6 @@ per square mile</th>
 <p>We can proceed with using pivot_longer as we did with the housing tibble so that year has its own column and renaming confusing column titles. We can join the water usage dataset to the table of Cook County municipalities to keep only observations within Cook County.</p>
 <p>To tidy the data further, we will select only columns of interest to us. We then check for NAs.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>water1 <span class="ot">&lt;-</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  wateruse <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">"2000"</span><span class="sc">:</span><span class="st">"2050"</span>),  <span class="co"># use pivot longer to ensure that "year" becomes</span></span>
@@ -993,12 +972,9 @@ per square mile</th>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>cook_water <span class="sc">%&gt;%</span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">is.na</span>(.))) <span class="co"># 0 NAs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Note that for each city, an entry exists for years 2000-2013, 2015, and 2020. Here is a preview of the data table just for the City of Oak Park (the actual table has 2,048 observations):</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cook_water <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Municipality <span class="sc">==</span> <span class="st">"Oak Park"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
@@ -1013,26 +989,25 @@ per square mile</th>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">html</span>(<span class="st">"&lt;b&gt; Residential Water Withdrawal &lt;b&gt;"</span>),</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">html</span>(<span class="st">"&lt;i&gt; 2000-2020, Oak Park, IL &lt;i&gt; "</span>))<span class="sc">%&gt;%</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_align_table_header</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="jhrwdayteb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jhrwdayteb table {
+<div id="sgdsxtrdxe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sgdsxtrdxe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jhrwdayteb thead, #jhrwdayteb tbody, #jhrwdayteb tfoot, #jhrwdayteb tr, #jhrwdayteb td, #jhrwdayteb th {
+#sgdsxtrdxe thead, #sgdsxtrdxe tbody, #sgdsxtrdxe tfoot, #sgdsxtrdxe tr, #sgdsxtrdxe td, #sgdsxtrdxe th {
   border-style: none;
 }
 
-#jhrwdayteb p {
+#sgdsxtrdxe p {
   margin: 0;
   padding: 0;
 }
 
-#jhrwdayteb .gt_table {
+#sgdsxtrdxe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1058,12 +1033,12 @@ per square mile</th>
   border-left-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_caption {
+#sgdsxtrdxe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jhrwdayteb .gt_title {
+#sgdsxtrdxe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1075,7 +1050,7 @@ per square mile</th>
   border-bottom-width: 0;
 }
 
-#jhrwdayteb .gt_subtitle {
+#sgdsxtrdxe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1087,7 +1062,7 @@ per square mile</th>
   border-top-width: 0;
 }
 
-#jhrwdayteb .gt_heading {
+#sgdsxtrdxe .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1099,13 +1074,13 @@ per square mile</th>
   border-right-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_bottom_border {
+#sgdsxtrdxe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_col_headings {
+#sgdsxtrdxe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1120,7 +1095,7 @@ per square mile</th>
   border-right-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_col_heading {
+#sgdsxtrdxe .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -1140,7 +1115,7 @@ per square mile</th>
   overflow-x: hidden;
 }
 
-#jhrwdayteb .gt_column_spanner_outer {
+#sgdsxtrdxe .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -1152,15 +1127,15 @@ per square mile</th>
   padding-right: 4px;
 }
 
-#jhrwdayteb .gt_column_spanner_outer:first-child {
+#sgdsxtrdxe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jhrwdayteb .gt_column_spanner_outer:last-child {
+#sgdsxtrdxe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jhrwdayteb .gt_column_spanner {
+#sgdsxtrdxe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1172,11 +1147,11 @@ per square mile</th>
   width: 100%;
 }
 
-#jhrwdayteb .gt_spanner_row {
+#sgdsxtrdxe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jhrwdayteb .gt_group_heading {
+#sgdsxtrdxe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1202,7 +1177,7 @@ per square mile</th>
   text-align: left;
 }
 
-#jhrwdayteb .gt_empty_group_heading {
+#sgdsxtrdxe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1217,15 +1192,15 @@ per square mile</th>
   vertical-align: middle;
 }
 
-#jhrwdayteb .gt_from_md > :first-child {
+#sgdsxtrdxe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jhrwdayteb .gt_from_md > :last-child {
+#sgdsxtrdxe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jhrwdayteb .gt_row {
+#sgdsxtrdxe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1244,7 +1219,7 @@ per square mile</th>
   overflow-x: hidden;
 }
 
-#jhrwdayteb .gt_stub {
+#sgdsxtrdxe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1257,7 +1232,7 @@ per square mile</th>
   padding-right: 5px;
 }
 
-#jhrwdayteb .gt_stub_row_group {
+#sgdsxtrdxe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1271,15 +1246,15 @@ per square mile</th>
   vertical-align: top;
 }
 
-#jhrwdayteb .gt_row_group_first td {
+#sgdsxtrdxe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jhrwdayteb .gt_row_group_first th {
+#sgdsxtrdxe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jhrwdayteb .gt_summary_row {
+#sgdsxtrdxe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1289,16 +1264,16 @@ per square mile</th>
   padding-right: 5px;
 }
 
-#jhrwdayteb .gt_first_summary_row {
+#sgdsxtrdxe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_first_summary_row.thick {
+#sgdsxtrdxe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jhrwdayteb .gt_last_summary_row {
+#sgdsxtrdxe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1308,7 +1283,7 @@ per square mile</th>
   border-bottom-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_grand_summary_row {
+#sgdsxtrdxe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1318,7 +1293,7 @@ per square mile</th>
   padding-right: 5px;
 }
 
-#jhrwdayteb .gt_first_grand_summary_row {
+#sgdsxtrdxe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1328,7 +1303,7 @@ per square mile</th>
   border-top-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_last_grand_summary_row_top {
+#sgdsxtrdxe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1338,11 +1313,11 @@ per square mile</th>
   border-bottom-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_striped {
+#sgdsxtrdxe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jhrwdayteb .gt_table_body {
+#sgdsxtrdxe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1351,7 +1326,7 @@ per square mile</th>
   border-bottom-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_footnotes {
+#sgdsxtrdxe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1365,7 +1340,7 @@ per square mile</th>
   border-right-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_footnote {
+#sgdsxtrdxe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1374,7 +1349,7 @@ per square mile</th>
   padding-right: 5px;
 }
 
-#jhrwdayteb .gt_sourcenotes {
+#sgdsxtrdxe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1388,7 +1363,7 @@ per square mile</th>
   border-right-color: #D3D3D3;
 }
 
-#jhrwdayteb .gt_sourcenote {
+#sgdsxtrdxe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1396,63 +1371,63 @@ per square mile</th>
   padding-right: 5px;
 }
 
-#jhrwdayteb .gt_left {
+#sgdsxtrdxe .gt_left {
   text-align: left;
 }
 
-#jhrwdayteb .gt_center {
+#sgdsxtrdxe .gt_center {
   text-align: center;
 }
 
-#jhrwdayteb .gt_right {
+#sgdsxtrdxe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jhrwdayteb .gt_font_normal {
+#sgdsxtrdxe .gt_font_normal {
   font-weight: normal;
 }
 
-#jhrwdayteb .gt_font_bold {
+#sgdsxtrdxe .gt_font_bold {
   font-weight: bold;
 }
 
-#jhrwdayteb .gt_font_italic {
+#sgdsxtrdxe .gt_font_italic {
   font-style: italic;
 }
 
-#jhrwdayteb .gt_super {
+#sgdsxtrdxe .gt_super {
   font-size: 65%;
 }
 
-#jhrwdayteb .gt_footnote_marks {
+#sgdsxtrdxe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jhrwdayteb .gt_asterisk {
+#sgdsxtrdxe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jhrwdayteb .gt_indent_1 {
+#sgdsxtrdxe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jhrwdayteb .gt_indent_2 {
+#sgdsxtrdxe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jhrwdayteb .gt_indent_3 {
+#sgdsxtrdxe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jhrwdayteb .gt_indent_4 {
+#sgdsxtrdxe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jhrwdayteb .gt_indent_5 {
+#sgdsxtrdxe .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1582,18 +1557,13 @@ Per Capita Per Day</th>
 <h3 class="anchored" data-anchor-id="flood-susceptibility-index-fsi">Flood Susceptibility Index (FSI)</h3>
 <p>The Flood Susceptibility Index (FSI) is used to “identify priority areas across the region for flood mitigation activities” according the documentation on CMAP’s website. The data has been aggregated to average FSI score at the municipal level. We will remove unwanted columns from the table.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fsi_score <span class="ot">&lt;-</span> fsi_score <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>OID_, <span class="sc">-</span>agency, <span class="sc">-</span>comments, <span class="sc">-</span>sdelength_, <span class="sc">-</span>st_area_sh, <span class="sc">-</span>Shape_Length,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>Shape_Area, <span class="sc">-</span>ZONE_CODE, <span class="sc">-</span>COUNT, <span class="sc">-</span>AREA, <span class="sc">-</span>PercentBlack, <span class="sc">-</span>agency_des_1, </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>OBJECTID) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>The nature of the data has included unincorporated areas in Cook County. We will filter out these areas, as we are only interested in incorporated municipalities with control over their own zoning codes.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(fsi_score<span class="sc">$</span>agency_des, <span class="st">"TWP"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fsi_score <span class="ot">&lt;-</span> fsi_score <span class="sc">%&gt;%</span></span>
@@ -1601,40 +1571,28 @@ Per Capita Per Day</th>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(municipali) <span class="sc">%&gt;%</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Municipality =</span> municipali,</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">FSI =</span> MEAN)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>From a glance, we can see that there are duplicates in the data. This is sometimes typical with GIS data brought into R – for whatever reason, shapefiles may have duplicate entries for the same place if geomteries are non-contiguous (ie - if a municipality is on the border of Cook County, it might get cut up into pieces when removing the portions not in Cook County). Now, we will look at duplicates to assess how to deal with them.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fsi_score <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Municipality) <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>The aggregated FSI is identical among any duplicate instances, so at this point, we can remove duplicates.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fsi_score <span class="ot">&lt;-</span> fsi_score <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Now, we can check for missing values in the data.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fsi_score <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">is.na</span>(.))) <span class="co"># there are 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>All datasets seem tidy at this point, because each variable has its own column, each row is an observation, and each value has its own cell.</p>
 <p><strong>The unit of observation for cook_water and cook_housing is municipality in Cook County by year. Each observation now has its own row. The unit of observation for the flood susceptibility index is municipality in Cook County. The FSI was devised in 2018 but is meant to be a long-term guide for flood mitigation efforts that indicates long ranging trends in the area, not a point-in-time dataset.</strong></p>
 <p>At this point, we can join the data that have matching units of observation. We will also ensure that the “year” column is being treated as a number.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="ot">&lt;-</span> <span class="fu">full_join</span>(cook_housing, cook_water,</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="fu">join_by</span>(year <span class="sc">==</span> year,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                               Municipality <span class="sc">==</span> Municipality))</span>
@@ -1642,12 +1600,9 @@ Per Capita Per Day</th>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="ot">&lt;-</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>We will also join housing density in the county for 2020 to the flood susceptibility index to investigate current conditions regarding flood risk and housing density.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>housing_FSI_2020 <span class="ot">&lt;-</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  housingdensity_2020 <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(NAME, housing_density)) <span class="sc">%&gt;%</span></span>
@@ -1658,13 +1613,10 @@ Per Capita Per Day</th>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(agency_des)) <span class="sc">%&gt;%</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FSI =</span> <span class="fu">round</span>(FSI, <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>We have also checked for missing values and determined how to address them. We may now explore the data before moving onto visualizing the results.</p>
 <p><strong>Here is a “snapshot” of the residential water usage and housing density dataset, arranged in descending order regardless of year by residential daily water usage, noting that values for average gallons of water withdrawn per capita per day are projections after 2013:</strong></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gpcd)) <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
@@ -1681,26 +1633,25 @@ Per Capita Per Day</th>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">html</span>(<span class="st">"&lt;b&gt; Housing Density &amp; Residential Water Withdrawal &lt;b&gt;"</span>),</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">html</span>(<span class="st">"&lt;i&gt; Average from 2000 - projected 2020, Cook County, IL &lt;i&gt; "</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_align_table_header</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="tczyrvckym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tczyrvckym table {
+<div id="tnwhzzxkxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tnwhzzxkxq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tczyrvckym thead, #tczyrvckym tbody, #tczyrvckym tfoot, #tczyrvckym tr, #tczyrvckym td, #tczyrvckym th {
+#tnwhzzxkxq thead, #tnwhzzxkxq tbody, #tnwhzzxkxq tfoot, #tnwhzzxkxq tr, #tnwhzzxkxq td, #tnwhzzxkxq th {
   border-style: none;
 }
 
-#tczyrvckym p {
+#tnwhzzxkxq p {
   margin: 0;
   padding: 0;
 }
 
-#tczyrvckym .gt_table {
+#tnwhzzxkxq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1726,12 +1677,12 @@ Per Capita Per Day</th>
   border-left-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_caption {
+#tnwhzzxkxq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tczyrvckym .gt_title {
+#tnwhzzxkxq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1743,7 +1694,7 @@ Per Capita Per Day</th>
   border-bottom-width: 0;
 }
 
-#tczyrvckym .gt_subtitle {
+#tnwhzzxkxq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1755,7 +1706,7 @@ Per Capita Per Day</th>
   border-top-width: 0;
 }
 
-#tczyrvckym .gt_heading {
+#tnwhzzxkxq .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1767,13 +1718,13 @@ Per Capita Per Day</th>
   border-right-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_bottom_border {
+#tnwhzzxkxq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_col_headings {
+#tnwhzzxkxq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1788,7 +1739,7 @@ Per Capita Per Day</th>
   border-right-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_col_heading {
+#tnwhzzxkxq .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -1808,7 +1759,7 @@ Per Capita Per Day</th>
   overflow-x: hidden;
 }
 
-#tczyrvckym .gt_column_spanner_outer {
+#tnwhzzxkxq .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -1820,15 +1771,15 @@ Per Capita Per Day</th>
   padding-right: 4px;
 }
 
-#tczyrvckym .gt_column_spanner_outer:first-child {
+#tnwhzzxkxq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tczyrvckym .gt_column_spanner_outer:last-child {
+#tnwhzzxkxq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tczyrvckym .gt_column_spanner {
+#tnwhzzxkxq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1840,11 +1791,11 @@ Per Capita Per Day</th>
   width: 100%;
 }
 
-#tczyrvckym .gt_spanner_row {
+#tnwhzzxkxq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tczyrvckym .gt_group_heading {
+#tnwhzzxkxq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1870,7 +1821,7 @@ Per Capita Per Day</th>
   text-align: left;
 }
 
-#tczyrvckym .gt_empty_group_heading {
+#tnwhzzxkxq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1885,15 +1836,15 @@ Per Capita Per Day</th>
   vertical-align: middle;
 }
 
-#tczyrvckym .gt_from_md > :first-child {
+#tnwhzzxkxq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tczyrvckym .gt_from_md > :last-child {
+#tnwhzzxkxq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tczyrvckym .gt_row {
+#tnwhzzxkxq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1912,7 +1863,7 @@ Per Capita Per Day</th>
   overflow-x: hidden;
 }
 
-#tczyrvckym .gt_stub {
+#tnwhzzxkxq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1925,7 +1876,7 @@ Per Capita Per Day</th>
   padding-right: 5px;
 }
 
-#tczyrvckym .gt_stub_row_group {
+#tnwhzzxkxq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1939,15 +1890,15 @@ Per Capita Per Day</th>
   vertical-align: top;
 }
 
-#tczyrvckym .gt_row_group_first td {
+#tnwhzzxkxq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tczyrvckym .gt_row_group_first th {
+#tnwhzzxkxq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tczyrvckym .gt_summary_row {
+#tnwhzzxkxq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1957,16 +1908,16 @@ Per Capita Per Day</th>
   padding-right: 5px;
 }
 
-#tczyrvckym .gt_first_summary_row {
+#tnwhzzxkxq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_first_summary_row.thick {
+#tnwhzzxkxq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tczyrvckym .gt_last_summary_row {
+#tnwhzzxkxq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1976,7 +1927,7 @@ Per Capita Per Day</th>
   border-bottom-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_grand_summary_row {
+#tnwhzzxkxq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1986,7 +1937,7 @@ Per Capita Per Day</th>
   padding-right: 5px;
 }
 
-#tczyrvckym .gt_first_grand_summary_row {
+#tnwhzzxkxq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1996,7 +1947,7 @@ Per Capita Per Day</th>
   border-top-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_last_grand_summary_row_top {
+#tnwhzzxkxq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2006,11 +1957,11 @@ Per Capita Per Day</th>
   border-bottom-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_striped {
+#tnwhzzxkxq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tczyrvckym .gt_table_body {
+#tnwhzzxkxq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2019,7 +1970,7 @@ Per Capita Per Day</th>
   border-bottom-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_footnotes {
+#tnwhzzxkxq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2033,7 +1984,7 @@ Per Capita Per Day</th>
   border-right-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_footnote {
+#tnwhzzxkxq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2042,7 +1993,7 @@ Per Capita Per Day</th>
   padding-right: 5px;
 }
 
-#tczyrvckym .gt_sourcenotes {
+#tnwhzzxkxq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2056,7 +2007,7 @@ Per Capita Per Day</th>
   border-right-color: #D3D3D3;
 }
 
-#tczyrvckym .gt_sourcenote {
+#tnwhzzxkxq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2064,63 +2015,63 @@ Per Capita Per Day</th>
   padding-right: 5px;
 }
 
-#tczyrvckym .gt_left {
+#tnwhzzxkxq .gt_left {
   text-align: left;
 }
 
-#tczyrvckym .gt_center {
+#tnwhzzxkxq .gt_center {
   text-align: center;
 }
 
-#tczyrvckym .gt_right {
+#tnwhzzxkxq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tczyrvckym .gt_font_normal {
+#tnwhzzxkxq .gt_font_normal {
   font-weight: normal;
 }
 
-#tczyrvckym .gt_font_bold {
+#tnwhzzxkxq .gt_font_bold {
   font-weight: bold;
 }
 
-#tczyrvckym .gt_font_italic {
+#tnwhzzxkxq .gt_font_italic {
   font-style: italic;
 }
 
-#tczyrvckym .gt_super {
+#tnwhzzxkxq .gt_super {
   font-size: 65%;
 }
 
-#tczyrvckym .gt_footnote_marks {
+#tnwhzzxkxq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tczyrvckym .gt_asterisk {
+#tnwhzzxkxq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tczyrvckym .gt_indent_1 {
+#tnwhzzxkxq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tczyrvckym .gt_indent_2 {
+#tnwhzzxkxq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tczyrvckym .gt_indent_3 {
+#tnwhzzxkxq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tczyrvckym .gt_indent_4 {
+#tnwhzzxkxq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tczyrvckym .gt_indent_5 {
+#tnwhzzxkxq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2264,8 +2215,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <p>Robbins and Glenview consistently use the highest amount of water per capita per day.</p>
 <p><strong>Here is a table visualizing part of the housing density and FSI dataset (municiaplities with the highest 10 average FSIs are at the top):</strong></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>housing_FSI_2020 <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(FSI)) <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
@@ -2281,26 +2230,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">html</span>(<span class="st">"&lt;b&gt; Housing Density &amp; Aggregated Flood Susceptibility Index Score by Municipality &lt;b&gt;"</span>),</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">html</span>(<span class="st">"&lt;i&gt; Cook County, IL, 2020 &lt;i&gt; "</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_align_table_header</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="ljrlmtpazz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ljrlmtpazz table {
+<div id="dtnsqyjstn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dtnsqyjstn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ljrlmtpazz thead, #ljrlmtpazz tbody, #ljrlmtpazz tfoot, #ljrlmtpazz tr, #ljrlmtpazz td, #ljrlmtpazz th {
+#dtnsqyjstn thead, #dtnsqyjstn tbody, #dtnsqyjstn tfoot, #dtnsqyjstn tr, #dtnsqyjstn td, #dtnsqyjstn th {
   border-style: none;
 }
 
-#ljrlmtpazz p {
+#dtnsqyjstn p {
   margin: 0;
   padding: 0;
 }
 
-#ljrlmtpazz .gt_table {
+#dtnsqyjstn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2326,12 +2274,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_caption {
+#dtnsqyjstn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ljrlmtpazz .gt_title {
+#dtnsqyjstn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2343,7 +2291,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#ljrlmtpazz .gt_subtitle {
+#dtnsqyjstn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2355,7 +2303,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#ljrlmtpazz .gt_heading {
+#dtnsqyjstn .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2367,13 +2315,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_bottom_border {
+#dtnsqyjstn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_col_headings {
+#dtnsqyjstn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2388,7 +2336,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_col_heading {
+#dtnsqyjstn .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -2408,7 +2356,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#ljrlmtpazz .gt_column_spanner_outer {
+#dtnsqyjstn .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -2420,15 +2368,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#ljrlmtpazz .gt_column_spanner_outer:first-child {
+#dtnsqyjstn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ljrlmtpazz .gt_column_spanner_outer:last-child {
+#dtnsqyjstn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ljrlmtpazz .gt_column_spanner {
+#dtnsqyjstn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2440,11 +2388,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#ljrlmtpazz .gt_spanner_row {
+#dtnsqyjstn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ljrlmtpazz .gt_group_heading {
+#dtnsqyjstn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2470,7 +2418,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#ljrlmtpazz .gt_empty_group_heading {
+#dtnsqyjstn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2485,15 +2433,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#ljrlmtpazz .gt_from_md > :first-child {
+#dtnsqyjstn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ljrlmtpazz .gt_from_md > :last-child {
+#dtnsqyjstn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ljrlmtpazz .gt_row {
+#dtnsqyjstn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2512,7 +2460,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#ljrlmtpazz .gt_stub {
+#dtnsqyjstn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2525,7 +2473,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#ljrlmtpazz .gt_stub_row_group {
+#dtnsqyjstn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2539,15 +2487,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#ljrlmtpazz .gt_row_group_first td {
+#dtnsqyjstn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ljrlmtpazz .gt_row_group_first th {
+#dtnsqyjstn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ljrlmtpazz .gt_summary_row {
+#dtnsqyjstn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2557,16 +2505,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#ljrlmtpazz .gt_first_summary_row {
+#dtnsqyjstn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_first_summary_row.thick {
+#dtnsqyjstn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ljrlmtpazz .gt_last_summary_row {
+#dtnsqyjstn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2576,7 +2524,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_grand_summary_row {
+#dtnsqyjstn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2586,7 +2534,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#ljrlmtpazz .gt_first_grand_summary_row {
+#dtnsqyjstn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2596,7 +2544,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_last_grand_summary_row_top {
+#dtnsqyjstn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2606,11 +2554,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_striped {
+#dtnsqyjstn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ljrlmtpazz .gt_table_body {
+#dtnsqyjstn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2619,7 +2567,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_footnotes {
+#dtnsqyjstn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2633,7 +2581,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_footnote {
+#dtnsqyjstn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2642,7 +2590,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#ljrlmtpazz .gt_sourcenotes {
+#dtnsqyjstn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2656,7 +2604,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#ljrlmtpazz .gt_sourcenote {
+#dtnsqyjstn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2664,63 +2612,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#ljrlmtpazz .gt_left {
+#dtnsqyjstn .gt_left {
   text-align: left;
 }
 
-#ljrlmtpazz .gt_center {
+#dtnsqyjstn .gt_center {
   text-align: center;
 }
 
-#ljrlmtpazz .gt_right {
+#dtnsqyjstn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ljrlmtpazz .gt_font_normal {
+#dtnsqyjstn .gt_font_normal {
   font-weight: normal;
 }
 
-#ljrlmtpazz .gt_font_bold {
+#dtnsqyjstn .gt_font_bold {
   font-weight: bold;
 }
 
-#ljrlmtpazz .gt_font_italic {
+#dtnsqyjstn .gt_font_italic {
   font-style: italic;
 }
 
-#ljrlmtpazz .gt_super {
+#dtnsqyjstn .gt_super {
   font-size: 65%;
 }
 
-#ljrlmtpazz .gt_footnote_marks {
+#dtnsqyjstn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ljrlmtpazz .gt_asterisk {
+#dtnsqyjstn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ljrlmtpazz .gt_indent_1 {
+#dtnsqyjstn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ljrlmtpazz .gt_indent_2 {
+#dtnsqyjstn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ljrlmtpazz .gt_indent_3 {
+#dtnsqyjstn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ljrlmtpazz .gt_indent_4 {
+#dtnsqyjstn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ljrlmtpazz .gt_indent_5 {
+#dtnsqyjstn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2816,15 +2764,12 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(cook_water_housingdensity) <span class="co"># 2048 x 4</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(housing_FSI_2020) <span class="co"># 134 x 4</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Municipality) <span class="sc">%&gt;%</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="co"># 128 grouped municipalities</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>The FSI dataset contains all municipalities in Cook County, while some had to be omitted from the water usage and housing density dataset (as discussed above). This accounts for the discrepancies in dimensions.</p>
 </section>
@@ -2833,8 +2778,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <h2 class="anchored" data-anchor-id="creating-a-theme">Creating a theme</h2>
 <p>We will create a theme to standardize our visualizations.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>theme_hm <span class="ot">&lt;-</span> <span class="cf">function</span>(){ </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  font <span class="ot">&lt;-</span> <span class="st">"sans"</span>   <span class="co">#assign font family up front</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_wsj</span>() <span class="sc">%+replace%</span>    <span class="co">#replace elements we want to change</span></span>
@@ -2876,7 +2819,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>      </span>
 <span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 </section>
@@ -2885,8 +2827,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <section id="density-and-water" class="level2">
 <h2 class="anchored" data-anchor-id="density-and-water">Density and Water</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(gpcd, units_per_sqmile), mean))</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mean for residential usage across the entire data set is 85.92 GPCD</span></span>
@@ -2923,12 +2863,9 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(gpcd, units_per_sqmile), sd))</span>
 <span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co"># SD for water usage - 36.45</span></span>
 <span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co"># SD for housing density - 1045</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Bedford Park has the lowest housing density throughout the 20 year period, occurring in 2011 and 2020. Oak Park has the highest density of the dataset in 2020. Robbins had the highest residential water usage per capita in 2000, and Homer Glen was reportedly the lowest in 2000, but this was before the municipality was incorporated in 2001. Based on the IQR and standard deviation, it seems like this dataset may have a lot of outliers, particluarly for the housing density variable.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">avgdensity =</span> <span class="fu">round</span>(<span class="fu">mean</span>(units_per_sqmile), <span class="dv">0</span>),</span>
@@ -2951,26 +2888,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">html</span>(<span class="st">"&lt;b&gt; Summary Statistics &lt;br&gt; Housing Density &amp; Residential Water Withdrawal&lt;b&gt;"</span>),</span>
 <span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">html</span>(<span class="st">"&lt;i&gt; 2000 - 2020, &lt;br&gt; Municipalities in Cook County, IL &lt;i&gt; "</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_align_table_header</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="fwlliihgea" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fwlliihgea table {
+<div id="srdwdlklpv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#srdwdlklpv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fwlliihgea thead, #fwlliihgea tbody, #fwlliihgea tfoot, #fwlliihgea tr, #fwlliihgea td, #fwlliihgea th {
+#srdwdlklpv thead, #srdwdlklpv tbody, #srdwdlklpv tfoot, #srdwdlklpv tr, #srdwdlklpv td, #srdwdlklpv th {
   border-style: none;
 }
 
-#fwlliihgea p {
+#srdwdlklpv p {
   margin: 0;
   padding: 0;
 }
 
-#fwlliihgea .gt_table {
+#srdwdlklpv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2996,12 +2932,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_caption {
+#srdwdlklpv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fwlliihgea .gt_title {
+#srdwdlklpv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3013,7 +2949,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#fwlliihgea .gt_subtitle {
+#srdwdlklpv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3025,7 +2961,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#fwlliihgea .gt_heading {
+#srdwdlklpv .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3037,13 +2973,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_bottom_border {
+#srdwdlklpv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_col_headings {
+#srdwdlklpv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3058,7 +2994,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_col_heading {
+#srdwdlklpv .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -3078,7 +3014,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#fwlliihgea .gt_column_spanner_outer {
+#srdwdlklpv .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -3090,15 +3026,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#fwlliihgea .gt_column_spanner_outer:first-child {
+#srdwdlklpv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fwlliihgea .gt_column_spanner_outer:last-child {
+#srdwdlklpv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fwlliihgea .gt_column_spanner {
+#srdwdlklpv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3110,11 +3046,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#fwlliihgea .gt_spanner_row {
+#srdwdlklpv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fwlliihgea .gt_group_heading {
+#srdwdlklpv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3140,7 +3076,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#fwlliihgea .gt_empty_group_heading {
+#srdwdlklpv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3155,15 +3091,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#fwlliihgea .gt_from_md > :first-child {
+#srdwdlklpv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fwlliihgea .gt_from_md > :last-child {
+#srdwdlklpv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fwlliihgea .gt_row {
+#srdwdlklpv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3182,7 +3118,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#fwlliihgea .gt_stub {
+#srdwdlklpv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3195,7 +3131,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#fwlliihgea .gt_stub_row_group {
+#srdwdlklpv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3209,15 +3145,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#fwlliihgea .gt_row_group_first td {
+#srdwdlklpv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fwlliihgea .gt_row_group_first th {
+#srdwdlklpv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fwlliihgea .gt_summary_row {
+#srdwdlklpv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3227,16 +3163,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#fwlliihgea .gt_first_summary_row {
+#srdwdlklpv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_first_summary_row.thick {
+#srdwdlklpv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fwlliihgea .gt_last_summary_row {
+#srdwdlklpv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3246,7 +3182,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_grand_summary_row {
+#srdwdlklpv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3256,7 +3192,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#fwlliihgea .gt_first_grand_summary_row {
+#srdwdlklpv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3266,7 +3202,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_last_grand_summary_row_top {
+#srdwdlklpv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3276,11 +3212,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_striped {
+#srdwdlklpv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fwlliihgea .gt_table_body {
+#srdwdlklpv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3289,7 +3225,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_footnotes {
+#srdwdlklpv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3303,7 +3239,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_footnote {
+#srdwdlklpv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3312,7 +3248,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#fwlliihgea .gt_sourcenotes {
+#srdwdlklpv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3326,7 +3262,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#fwlliihgea .gt_sourcenote {
+#srdwdlklpv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3334,63 +3270,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#fwlliihgea .gt_left {
+#srdwdlklpv .gt_left {
   text-align: left;
 }
 
-#fwlliihgea .gt_center {
+#srdwdlklpv .gt_center {
   text-align: center;
 }
 
-#fwlliihgea .gt_right {
+#srdwdlklpv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fwlliihgea .gt_font_normal {
+#srdwdlklpv .gt_font_normal {
   font-weight: normal;
 }
 
-#fwlliihgea .gt_font_bold {
+#srdwdlklpv .gt_font_bold {
   font-weight: bold;
 }
 
-#fwlliihgea .gt_font_italic {
+#srdwdlklpv .gt_font_italic {
   font-style: italic;
 }
 
-#fwlliihgea .gt_super {
+#srdwdlklpv .gt_super {
   font-size: 65%;
 }
 
-#fwlliihgea .gt_footnote_marks {
+#srdwdlklpv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fwlliihgea .gt_asterisk {
+#srdwdlklpv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fwlliihgea .gt_indent_1 {
+#srdwdlklpv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fwlliihgea .gt_indent_2 {
+#srdwdlklpv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fwlliihgea .gt_indent_3 {
+#srdwdlklpv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fwlliihgea .gt_indent_4 {
+#srdwdlklpv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fwlliihgea .gt_indent_5 {
+#srdwdlklpv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3459,8 +3395,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> gpcd)) <span class="sc">+</span></span>
@@ -3469,7 +3403,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Density Plot: Residential Gallons of Water </span><span class="sc">\n</span><span class="st"> Per Capita Per Day (GPCD) Withdrawn"</span>,</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3480,8 +3413,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>Daily residential water usage per capita from 2000 - 2020 is relatively normal, but skewed right.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> units_per_sqmile)) <span class="sc">+</span></span>
@@ -3490,7 +3421,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Density Plot: Housing Units Per Square Mile"</span>,</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3501,8 +3431,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>This dataset has an irregular distribution. This reflects the diverse forms that municipalities within Cook County take – some are much more dense than others. We will also use box plots to visualize outliers.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gpcd)) <span class="sc">+</span></span>
@@ -3510,7 +3438,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Box Plot: Residential Gallons of Water </span><span class="sc">\n</span><span class="st"> Per Capita Per Day (GPCD) Withdrawn"</span>,</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3521,8 +3448,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>Lots of outliers on both the high and low end of the graph for residential daily water use.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> units_per_sqmile)) <span class="sc">+</span></span>
@@ -3530,7 +3455,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Box Plot: Housing Units Per Square Mile"</span>,</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3546,23 +3470,23 @@ US Census Bureau, 2020 Decennial Census, table H1
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="seoxoqmvhi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#seoxoqmvhi table {
+<div id="zfktiwfite" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zfktiwfite table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#seoxoqmvhi thead, #seoxoqmvhi tbody, #seoxoqmvhi tfoot, #seoxoqmvhi tr, #seoxoqmvhi td, #seoxoqmvhi th {
+#zfktiwfite thead, #zfktiwfite tbody, #zfktiwfite tfoot, #zfktiwfite tr, #zfktiwfite td, #zfktiwfite th {
   border-style: none;
 }
 
-#seoxoqmvhi p {
+#zfktiwfite p {
   margin: 0;
   padding: 0;
 }
 
-#seoxoqmvhi .gt_table {
+#zfktiwfite .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3588,12 +3512,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_caption {
+#zfktiwfite .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#seoxoqmvhi .gt_title {
+#zfktiwfite .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3605,7 +3529,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#seoxoqmvhi .gt_subtitle {
+#zfktiwfite .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3617,7 +3541,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#seoxoqmvhi .gt_heading {
+#zfktiwfite .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3629,13 +3553,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_bottom_border {
+#zfktiwfite .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_col_headings {
+#zfktiwfite .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3650,7 +3574,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_col_heading {
+#zfktiwfite .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -3670,7 +3594,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#seoxoqmvhi .gt_column_spanner_outer {
+#zfktiwfite .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -3682,15 +3606,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#seoxoqmvhi .gt_column_spanner_outer:first-child {
+#zfktiwfite .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#seoxoqmvhi .gt_column_spanner_outer:last-child {
+#zfktiwfite .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#seoxoqmvhi .gt_column_spanner {
+#zfktiwfite .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3702,11 +3626,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#seoxoqmvhi .gt_spanner_row {
+#zfktiwfite .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#seoxoqmvhi .gt_group_heading {
+#zfktiwfite .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3732,7 +3656,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#seoxoqmvhi .gt_empty_group_heading {
+#zfktiwfite .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3747,15 +3671,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#seoxoqmvhi .gt_from_md > :first-child {
+#zfktiwfite .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#seoxoqmvhi .gt_from_md > :last-child {
+#zfktiwfite .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#seoxoqmvhi .gt_row {
+#zfktiwfite .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3774,7 +3698,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#seoxoqmvhi .gt_stub {
+#zfktiwfite .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3787,7 +3711,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#seoxoqmvhi .gt_stub_row_group {
+#zfktiwfite .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3801,15 +3725,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#seoxoqmvhi .gt_row_group_first td {
+#zfktiwfite .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#seoxoqmvhi .gt_row_group_first th {
+#zfktiwfite .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#seoxoqmvhi .gt_summary_row {
+#zfktiwfite .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3819,16 +3743,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#seoxoqmvhi .gt_first_summary_row {
+#zfktiwfite .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_first_summary_row.thick {
+#zfktiwfite .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#seoxoqmvhi .gt_last_summary_row {
+#zfktiwfite .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3838,7 +3762,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_grand_summary_row {
+#zfktiwfite .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3848,7 +3772,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#seoxoqmvhi .gt_first_grand_summary_row {
+#zfktiwfite .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3858,7 +3782,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_last_grand_summary_row_top {
+#zfktiwfite .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3868,11 +3792,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_striped {
+#zfktiwfite .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#seoxoqmvhi .gt_table_body {
+#zfktiwfite .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3881,7 +3805,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_footnotes {
+#zfktiwfite .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3895,7 +3819,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_footnote {
+#zfktiwfite .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3904,7 +3828,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#seoxoqmvhi .gt_sourcenotes {
+#zfktiwfite .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3918,7 +3842,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#seoxoqmvhi .gt_sourcenote {
+#zfktiwfite .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3926,63 +3850,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#seoxoqmvhi .gt_left {
+#zfktiwfite .gt_left {
   text-align: left;
 }
 
-#seoxoqmvhi .gt_center {
+#zfktiwfite .gt_center {
   text-align: center;
 }
 
-#seoxoqmvhi .gt_right {
+#zfktiwfite .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#seoxoqmvhi .gt_font_normal {
+#zfktiwfite .gt_font_normal {
   font-weight: normal;
 }
 
-#seoxoqmvhi .gt_font_bold {
+#zfktiwfite .gt_font_bold {
   font-weight: bold;
 }
 
-#seoxoqmvhi .gt_font_italic {
+#zfktiwfite .gt_font_italic {
   font-style: italic;
 }
 
-#seoxoqmvhi .gt_super {
+#zfktiwfite .gt_super {
   font-size: 65%;
 }
 
-#seoxoqmvhi .gt_footnote_marks {
+#zfktiwfite .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#seoxoqmvhi .gt_asterisk {
+#zfktiwfite .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#seoxoqmvhi .gt_indent_1 {
+#zfktiwfite .gt_indent_1 {
   text-indent: 5px;
 }
 
-#seoxoqmvhi .gt_indent_2 {
+#zfktiwfite .gt_indent_2 {
   text-indent: 10px;
 }
 
-#seoxoqmvhi .gt_indent_3 {
+#zfktiwfite .gt_indent_3 {
   text-indent: 15px;
 }
 
-#seoxoqmvhi .gt_indent_4 {
+#zfktiwfite .gt_indent_4 {
   text-indent: 20px;
 }
 
-#seoxoqmvhi .gt_indent_5 {
+#zfktiwfite .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -5197,8 +5121,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>This table groups values by municipality. The table is sorted in descending order on average daily residential water use per capita. Understandably, there is lower variation within data from the same city, but it is interesting to consider cities with high standard deviations like Hometown, Posen, or Berwyn.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Municipality) <span class="sc">%&gt;%</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
@@ -5213,7 +5135,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Density Plot: Daily Residential Water Usage </span><span class="sc">\n</span><span class="st"> in Gallons Per Capita Per Day (GPCD)"</span>,</span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Grouped by Municipality in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5224,8 +5145,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>This plot is very similar to the original, ungrouped density plot for this variable. It is skewed right.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Municipality) <span class="sc">%&gt;%</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
@@ -5240,7 +5159,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Density Plot: Housing Units Per Square Mile"</span>,</span>
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Grouped by Municipality in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5251,8 +5169,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>This is somewhat similar to the ungrouped density plot, but this “smooths out” the curve on the left of the plot. It is approaching a normal distribution but is still skewed right.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Municipality) <span class="sc">%&gt;%</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
@@ -5267,7 +5183,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Box Plot: Daily Residential Water Usage </span><span class="sc">\n</span><span class="st"> in Gallons Per Capita Per Day (GPCD)"</span>,</span>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Grouped by Municipality in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5278,8 +5193,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>There is about the same distribution of outliers for residential daily water use when grouped by municipality.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Municipality) <span class="sc">%&gt;%</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
@@ -5294,7 +5207,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Box Plot: Housing Units Per Square Mile"</span>,</span>
 <span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Grouped by Municipality in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5308,8 +5220,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <section id="density-and-water-summary-statistics-grouped-by-year" class="level3">
 <h3 class="anchored" data-anchor-id="density-and-water-summary-statistics-grouped-by-year">Density and Water Summary Statistics Grouped by Year</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
@@ -5335,26 +5245,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">html</span>(<span class="st">"&lt;b&gt; Summary Statistics &lt;br&gt; Housing Density &amp; Residential Water Withdrawal by Year&lt;b&gt;"</span>),</span>
 <span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">html</span>(<span class="st">"&lt;i&gt; Average from 2000 - projected 2020, Cook County, IL &lt;i&gt; "</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_align_table_header</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="botfzubbxs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#botfzubbxs table {
+<div id="doyjncoxpc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#doyjncoxpc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#botfzubbxs thead, #botfzubbxs tbody, #botfzubbxs tfoot, #botfzubbxs tr, #botfzubbxs td, #botfzubbxs th {
+#doyjncoxpc thead, #doyjncoxpc tbody, #doyjncoxpc tfoot, #doyjncoxpc tr, #doyjncoxpc td, #doyjncoxpc th {
   border-style: none;
 }
 
-#botfzubbxs p {
+#doyjncoxpc p {
   margin: 0;
   padding: 0;
 }
 
-#botfzubbxs .gt_table {
+#doyjncoxpc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5380,12 +5289,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_caption {
+#doyjncoxpc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#botfzubbxs .gt_title {
+#doyjncoxpc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5397,7 +5306,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#botfzubbxs .gt_subtitle {
+#doyjncoxpc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5409,7 +5318,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#botfzubbxs .gt_heading {
+#doyjncoxpc .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -5421,13 +5330,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_bottom_border {
+#doyjncoxpc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_col_headings {
+#doyjncoxpc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5442,7 +5351,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_col_heading {
+#doyjncoxpc .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -5462,7 +5371,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#botfzubbxs .gt_column_spanner_outer {
+#doyjncoxpc .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -5474,15 +5383,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#botfzubbxs .gt_column_spanner_outer:first-child {
+#doyjncoxpc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#botfzubbxs .gt_column_spanner_outer:last-child {
+#doyjncoxpc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#botfzubbxs .gt_column_spanner {
+#doyjncoxpc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5494,11 +5403,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#botfzubbxs .gt_spanner_row {
+#doyjncoxpc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#botfzubbxs .gt_group_heading {
+#doyjncoxpc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5524,7 +5433,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#botfzubbxs .gt_empty_group_heading {
+#doyjncoxpc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5539,15 +5448,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#botfzubbxs .gt_from_md > :first-child {
+#doyjncoxpc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#botfzubbxs .gt_from_md > :last-child {
+#doyjncoxpc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#botfzubbxs .gt_row {
+#doyjncoxpc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5566,7 +5475,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#botfzubbxs .gt_stub {
+#doyjncoxpc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5579,7 +5488,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#botfzubbxs .gt_stub_row_group {
+#doyjncoxpc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5593,15 +5502,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#botfzubbxs .gt_row_group_first td {
+#doyjncoxpc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#botfzubbxs .gt_row_group_first th {
+#doyjncoxpc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#botfzubbxs .gt_summary_row {
+#doyjncoxpc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5611,16 +5520,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#botfzubbxs .gt_first_summary_row {
+#doyjncoxpc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_first_summary_row.thick {
+#doyjncoxpc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#botfzubbxs .gt_last_summary_row {
+#doyjncoxpc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5630,7 +5539,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_grand_summary_row {
+#doyjncoxpc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5640,7 +5549,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#botfzubbxs .gt_first_grand_summary_row {
+#doyjncoxpc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5650,7 +5559,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_last_grand_summary_row_top {
+#doyjncoxpc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5660,11 +5569,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_striped {
+#doyjncoxpc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#botfzubbxs .gt_table_body {
+#doyjncoxpc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5673,7 +5582,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_footnotes {
+#doyjncoxpc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5687,7 +5596,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_footnote {
+#doyjncoxpc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5696,7 +5605,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#botfzubbxs .gt_sourcenotes {
+#doyjncoxpc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5710,7 +5619,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#botfzubbxs .gt_sourcenote {
+#doyjncoxpc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5718,63 +5627,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#botfzubbxs .gt_left {
+#doyjncoxpc .gt_left {
   text-align: left;
 }
 
-#botfzubbxs .gt_center {
+#doyjncoxpc .gt_center {
   text-align: center;
 }
 
-#botfzubbxs .gt_right {
+#doyjncoxpc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#botfzubbxs .gt_font_normal {
+#doyjncoxpc .gt_font_normal {
   font-weight: normal;
 }
 
-#botfzubbxs .gt_font_bold {
+#doyjncoxpc .gt_font_bold {
   font-weight: bold;
 }
 
-#botfzubbxs .gt_font_italic {
+#doyjncoxpc .gt_font_italic {
   font-style: italic;
 }
 
-#botfzubbxs .gt_super {
+#doyjncoxpc .gt_super {
   font-size: 65%;
 }
 
-#botfzubbxs .gt_footnote_marks {
+#doyjncoxpc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#botfzubbxs .gt_asterisk {
+#doyjncoxpc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#botfzubbxs .gt_indent_1 {
+#doyjncoxpc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#botfzubbxs .gt_indent_2 {
+#doyjncoxpc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#botfzubbxs .gt_indent_3 {
+#doyjncoxpc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#botfzubbxs .gt_indent_4 {
+#doyjncoxpc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#botfzubbxs .gt_indent_5 {
+#doyjncoxpc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -5981,8 +5890,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>This table provides summary statistics by year for the dataset.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
@@ -5997,7 +5904,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Density Plot: Average Daily Residential Water </span><span class="sc">\n</span><span class="st"> Usage in Gallons Per Capita Per Day (GPCD)"</span>,</span>
 <span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Grouped by Year in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -6008,8 +5914,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>Grouping values by year makes the density plot skew right.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgwater =</span> <span class="fu">round</span>(<span class="fu">mean</span>(gpcd), <span class="dv">2</span>),</span>
@@ -6024,7 +5928,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Density Plot: Average Housing Units </span><span class="sc">\n</span><span class="st"> Per Square Mile"</span>,</span>
 <span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Grouped by Year in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -6038,8 +5941,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <section id="flood-susceptibility-index" class="level3">
 <h3 class="anchored" data-anchor-id="flood-susceptibility-index">Flood Susceptibility Index</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>housing_FSI_2020 <span class="sc">%&gt;%</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avgFSI =</span> <span class="fu">round</span>(<span class="fu">mean</span>(FSI), <span class="dv">2</span>),</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">avgdensity =</span> <span class="fu">round</span>(<span class="fu">mean</span>(units_per_sqmile), <span class="dv">0</span>),</span>
@@ -6066,26 +5967,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">html</span>(<span class="st">"&lt;b&gt; Summary Statistics &lt;br&gt; Housing Density &amp; Flood Susceptibility Index (FSI) &lt;b&gt;"</span>),</span>
 <span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="fu">html</span>(<span class="st">"&lt;i&gt; Aggregated Score by Municipality 2020, Cook County, IL &lt;i&gt; "</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_align_table_header</span>(<span class="at">align =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="jybeesubyz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jybeesubyz table {
+<div id="zamgkcwjal" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zamgkcwjal table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jybeesubyz thead, #jybeesubyz tbody, #jybeesubyz tfoot, #jybeesubyz tr, #jybeesubyz td, #jybeesubyz th {
+#zamgkcwjal thead, #zamgkcwjal tbody, #zamgkcwjal tfoot, #zamgkcwjal tr, #zamgkcwjal td, #zamgkcwjal th {
   border-style: none;
 }
 
-#jybeesubyz p {
+#zamgkcwjal p {
   margin: 0;
   padding: 0;
 }
 
-#jybeesubyz .gt_table {
+#zamgkcwjal .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6111,12 +6011,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_caption {
+#zamgkcwjal .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jybeesubyz .gt_title {
+#zamgkcwjal .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6128,7 +6028,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#jybeesubyz .gt_subtitle {
+#zamgkcwjal .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6140,7 +6040,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#jybeesubyz .gt_heading {
+#zamgkcwjal .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -6152,13 +6052,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_bottom_border {
+#zamgkcwjal .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_col_headings {
+#zamgkcwjal .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6173,7 +6073,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_col_heading {
+#zamgkcwjal .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -6193,7 +6093,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#jybeesubyz .gt_column_spanner_outer {
+#zamgkcwjal .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -6205,15 +6105,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#jybeesubyz .gt_column_spanner_outer:first-child {
+#zamgkcwjal .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jybeesubyz .gt_column_spanner_outer:last-child {
+#zamgkcwjal .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jybeesubyz .gt_column_spanner {
+#zamgkcwjal .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -6225,11 +6125,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#jybeesubyz .gt_spanner_row {
+#zamgkcwjal .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jybeesubyz .gt_group_heading {
+#zamgkcwjal .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6255,7 +6155,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#jybeesubyz .gt_empty_group_heading {
+#zamgkcwjal .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -6270,15 +6170,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#jybeesubyz .gt_from_md > :first-child {
+#zamgkcwjal .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jybeesubyz .gt_from_md > :last-child {
+#zamgkcwjal .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jybeesubyz .gt_row {
+#zamgkcwjal .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6297,7 +6197,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#jybeesubyz .gt_stub {
+#zamgkcwjal .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6310,7 +6210,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#jybeesubyz .gt_stub_row_group {
+#zamgkcwjal .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6324,15 +6224,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#jybeesubyz .gt_row_group_first td {
+#zamgkcwjal .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jybeesubyz .gt_row_group_first th {
+#zamgkcwjal .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jybeesubyz .gt_summary_row {
+#zamgkcwjal .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6342,16 +6242,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#jybeesubyz .gt_first_summary_row {
+#zamgkcwjal .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_first_summary_row.thick {
+#zamgkcwjal .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jybeesubyz .gt_last_summary_row {
+#zamgkcwjal .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6361,7 +6261,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_grand_summary_row {
+#zamgkcwjal .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6371,7 +6271,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#jybeesubyz .gt_first_grand_summary_row {
+#zamgkcwjal .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6381,7 +6281,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_last_grand_summary_row_top {
+#zamgkcwjal .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6391,11 +6291,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_striped {
+#zamgkcwjal .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jybeesubyz .gt_table_body {
+#zamgkcwjal .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6404,7 +6304,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_footnotes {
+#zamgkcwjal .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6418,7 +6318,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_footnote {
+#zamgkcwjal .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -6427,7 +6327,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#jybeesubyz .gt_sourcenotes {
+#zamgkcwjal .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6441,7 +6341,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#jybeesubyz .gt_sourcenote {
+#zamgkcwjal .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6449,63 +6349,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#jybeesubyz .gt_left {
+#zamgkcwjal .gt_left {
   text-align: left;
 }
 
-#jybeesubyz .gt_center {
+#zamgkcwjal .gt_center {
   text-align: center;
 }
 
-#jybeesubyz .gt_right {
+#zamgkcwjal .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jybeesubyz .gt_font_normal {
+#zamgkcwjal .gt_font_normal {
   font-weight: normal;
 }
 
-#jybeesubyz .gt_font_bold {
+#zamgkcwjal .gt_font_bold {
   font-weight: bold;
 }
 
-#jybeesubyz .gt_font_italic {
+#zamgkcwjal .gt_font_italic {
   font-style: italic;
 }
 
-#jybeesubyz .gt_super {
+#zamgkcwjal .gt_super {
   font-size: 65%;
 }
 
-#jybeesubyz .gt_footnote_marks {
+#zamgkcwjal .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jybeesubyz .gt_asterisk {
+#zamgkcwjal .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jybeesubyz .gt_indent_1 {
+#zamgkcwjal .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jybeesubyz .gt_indent_2 {
+#zamgkcwjal .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jybeesubyz .gt_indent_3 {
+#zamgkcwjal .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jybeesubyz .gt_indent_4 {
+#zamgkcwjal .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jybeesubyz .gt_indent_5 {
+#zamgkcwjal .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -6576,15 +6476,10 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>This table provides summary statistics for the Flood Susceptibility Index. Hometown has the highest Flood Susceptibility Index aggregated score at 9.96, and Homer Glen has the lowest at 1.63.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(housing_FSI_2020 <span class="sc">%&gt;%</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(FSI <span class="sc">==</span> <span class="fu">min</span>(FSI) <span class="sc">|</span> FSI <span class="sc">==</span> <span class="fu">max</span>(FSI)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>housing_FSI_2020 <span class="sc">%&gt;%</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(FSI)) <span class="sc">+</span></span>
@@ -6592,7 +6487,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Density Plot: Aggregated Flood </span><span class="sc">\n</span><span class="st"> Susceptibility Index (FSI) Score"</span>,</span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Municipalities in Cook County, IL, 2020"</span>) <span class="sc">+</span></span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -6603,8 +6497,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>Flood susceptibility index scores are skewed to the left, meaning that most municipalities have higher FSI scores.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>housing_FSI_2020 <span class="sc">%&gt;%</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(FSI)) <span class="sc">+</span></span>
@@ -6612,7 +6504,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Box Plot: Aggregated Flood </span><span class="sc">\n</span><span class="st"> Susceptibility Index (FSI) Score"</span>,</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Municipalities in Cook County, IL, 2020"</span>) <span class="sc">+</span></span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -6628,8 +6519,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <section id="data-visualizations" class="level1">
 <h1>Data Visualizations</h1>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Municipality =</span> <span class="fu">as.factor</span>(Municipality)) <span class="sc">%&gt;%</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
@@ -6645,7 +6534,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Residential Gallons of Water </span><span class="sc">\n</span><span class="st"> Per Capita Per Day (GPCD) Withdrawn"</span>,</span>
 <span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Averaged for Municipalities in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -6656,8 +6544,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>Residential withdrawals of gallons of water per day has been decreasing on average across the county from 2000 to 2013, and this trend is projected to continue into 2020. The steepest decline begins around 2007. The highest average GPCD was 96.99 and occurred in 2005.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Municipality =</span> <span class="fu">as.factor</span>(Municipality)) <span class="sc">%&gt;%</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
@@ -6683,26 +6569,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"sienna3"</span>,</span>
 <span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">bold_target_only =</span> T </span>
 <span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="likmwywzvj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#likmwywzvj table {
+<div id="nwdztnsldu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nwdztnsldu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#likmwywzvj thead, #likmwywzvj tbody, #likmwywzvj tfoot, #likmwywzvj tr, #likmwywzvj td, #likmwywzvj th {
+#nwdztnsldu thead, #nwdztnsldu tbody, #nwdztnsldu tfoot, #nwdztnsldu tr, #nwdztnsldu td, #nwdztnsldu th {
   border-style: none;
 }
 
-#likmwywzvj p {
+#nwdztnsldu p {
   margin: 0;
   padding: 0;
 }
 
-#likmwywzvj .gt_table {
+#nwdztnsldu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6728,12 +6613,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_caption {
+#nwdztnsldu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#likmwywzvj .gt_title {
+#nwdztnsldu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6745,7 +6630,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#likmwywzvj .gt_subtitle {
+#nwdztnsldu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6757,7 +6642,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#likmwywzvj .gt_heading {
+#nwdztnsldu .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -6769,13 +6654,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_bottom_border {
+#nwdztnsldu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_col_headings {
+#nwdztnsldu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6790,7 +6675,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_col_heading {
+#nwdztnsldu .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -6810,7 +6695,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#likmwywzvj .gt_column_spanner_outer {
+#nwdztnsldu .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -6822,15 +6707,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#likmwywzvj .gt_column_spanner_outer:first-child {
+#nwdztnsldu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#likmwywzvj .gt_column_spanner_outer:last-child {
+#nwdztnsldu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#likmwywzvj .gt_column_spanner {
+#nwdztnsldu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -6842,11 +6727,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#likmwywzvj .gt_spanner_row {
+#nwdztnsldu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#likmwywzvj .gt_group_heading {
+#nwdztnsldu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6872,7 +6757,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#likmwywzvj .gt_empty_group_heading {
+#nwdztnsldu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -6887,15 +6772,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#likmwywzvj .gt_from_md > :first-child {
+#nwdztnsldu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#likmwywzvj .gt_from_md > :last-child {
+#nwdztnsldu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#likmwywzvj .gt_row {
+#nwdztnsldu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6914,7 +6799,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#likmwywzvj .gt_stub {
+#nwdztnsldu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6927,7 +6812,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#likmwywzvj .gt_stub_row_group {
+#nwdztnsldu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6941,15 +6826,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#likmwywzvj .gt_row_group_first td {
+#nwdztnsldu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#likmwywzvj .gt_row_group_first th {
+#nwdztnsldu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#likmwywzvj .gt_summary_row {
+#nwdztnsldu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6959,16 +6844,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#likmwywzvj .gt_first_summary_row {
+#nwdztnsldu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_first_summary_row.thick {
+#nwdztnsldu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#likmwywzvj .gt_last_summary_row {
+#nwdztnsldu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6978,7 +6863,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_grand_summary_row {
+#nwdztnsldu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6988,7 +6873,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#likmwywzvj .gt_first_grand_summary_row {
+#nwdztnsldu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6998,7 +6883,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_last_grand_summary_row_top {
+#nwdztnsldu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7008,11 +6893,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_striped {
+#nwdztnsldu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#likmwywzvj .gt_table_body {
+#nwdztnsldu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7021,7 +6906,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_footnotes {
+#nwdztnsldu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7035,7 +6920,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_footnote {
+#nwdztnsldu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -7044,7 +6929,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#likmwywzvj .gt_sourcenotes {
+#nwdztnsldu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7058,7 +6943,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#likmwywzvj .gt_sourcenote {
+#nwdztnsldu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -7066,63 +6951,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#likmwywzvj .gt_left {
+#nwdztnsldu .gt_left {
   text-align: left;
 }
 
-#likmwywzvj .gt_center {
+#nwdztnsldu .gt_center {
   text-align: center;
 }
 
-#likmwywzvj .gt_right {
+#nwdztnsldu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#likmwywzvj .gt_font_normal {
+#nwdztnsldu .gt_font_normal {
   font-weight: normal;
 }
 
-#likmwywzvj .gt_font_bold {
+#nwdztnsldu .gt_font_bold {
   font-weight: bold;
 }
 
-#likmwywzvj .gt_font_italic {
+#nwdztnsldu .gt_font_italic {
   font-style: italic;
 }
 
-#likmwywzvj .gt_super {
+#nwdztnsldu .gt_super {
   font-size: 65%;
 }
 
-#likmwywzvj .gt_footnote_marks {
+#nwdztnsldu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#likmwywzvj .gt_asterisk {
+#nwdztnsldu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#likmwywzvj .gt_indent_1 {
+#nwdztnsldu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#likmwywzvj .gt_indent_2 {
+#nwdztnsldu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#likmwywzvj .gt_indent_3 {
+#nwdztnsldu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#likmwywzvj .gt_indent_4 {
+#nwdztnsldu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#likmwywzvj .gt_indent_5 {
+#nwdztnsldu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -7232,8 +7117,6 @@ withdrawn for residential uses</th>
 </div>
 <p>The lowest GPCD is the projected value for 2020 at 65.55 GPCD. The lowest actual value was 77.23 GPCD in 2013. For context, the national average daily residential per capita water use in 2015 was 83 GPCD. In 2015, it is estimated that the Cook County region was below the national figure.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Municipality =</span> <span class="fu">as.factor</span>(Municipality)) <span class="sc">%&gt;%</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
@@ -7249,7 +7132,6 @@ withdrawn for residential uses</th>
 <span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Average Housing Density Per Year"</span>,</span>
 <span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Averaged for Municipalities in Cook County, IL, 2000 - 2020"</span>) <span class="sc">+</span></span>
 <span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -7260,8 +7142,6 @@ withdrawn for residential uses</th>
 </div>
 <p>The relationship between housing units per square mile and time is less straightforward than the change over time of residential water withdrawals. Housing density has remained somewhat stagnant from 2000 to 2020 with slight increases over the time period.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Municipality =</span> <span class="fu">as.factor</span>(Municipality)) <span class="sc">%&gt;%</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
@@ -7286,26 +7166,25 @@ withdrawn for residential uses</th>
 <span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"sienna3"</span>,</span>
 <span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">bold_target_only =</span> T </span>
 <span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="myzfmlrntf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#myzfmlrntf table {
+<div id="lirpqitlmw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lirpqitlmw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#myzfmlrntf thead, #myzfmlrntf tbody, #myzfmlrntf tfoot, #myzfmlrntf tr, #myzfmlrntf td, #myzfmlrntf th {
+#lirpqitlmw thead, #lirpqitlmw tbody, #lirpqitlmw tfoot, #lirpqitlmw tr, #lirpqitlmw td, #lirpqitlmw th {
   border-style: none;
 }
 
-#myzfmlrntf p {
+#lirpqitlmw p {
   margin: 0;
   padding: 0;
 }
 
-#myzfmlrntf .gt_table {
+#lirpqitlmw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -7331,12 +7210,12 @@ withdrawn for residential uses</th>
   border-left-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_caption {
+#lirpqitlmw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#myzfmlrntf .gt_title {
+#lirpqitlmw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -7348,7 +7227,7 @@ withdrawn for residential uses</th>
   border-bottom-width: 0;
 }
 
-#myzfmlrntf .gt_subtitle {
+#lirpqitlmw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -7360,7 +7239,7 @@ withdrawn for residential uses</th>
   border-top-width: 0;
 }
 
-#myzfmlrntf .gt_heading {
+#lirpqitlmw .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -7372,13 +7251,13 @@ withdrawn for residential uses</th>
   border-right-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_bottom_border {
+#lirpqitlmw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_col_headings {
+#lirpqitlmw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7393,7 +7272,7 @@ withdrawn for residential uses</th>
   border-right-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_col_heading {
+#lirpqitlmw .gt_col_heading {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -7413,7 +7292,7 @@ withdrawn for residential uses</th>
   overflow-x: hidden;
 }
 
-#myzfmlrntf .gt_column_spanner_outer {
+#lirpqitlmw .gt_column_spanner_outer {
   color: #333333;
   background-color: #87CEEB;
   font-size: 100%;
@@ -7425,15 +7304,15 @@ withdrawn for residential uses</th>
   padding-right: 4px;
 }
 
-#myzfmlrntf .gt_column_spanner_outer:first-child {
+#lirpqitlmw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#myzfmlrntf .gt_column_spanner_outer:last-child {
+#lirpqitlmw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#myzfmlrntf .gt_column_spanner {
+#lirpqitlmw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -7445,11 +7324,11 @@ withdrawn for residential uses</th>
   width: 100%;
 }
 
-#myzfmlrntf .gt_spanner_row {
+#lirpqitlmw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#myzfmlrntf .gt_group_heading {
+#lirpqitlmw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7475,7 +7354,7 @@ withdrawn for residential uses</th>
   text-align: left;
 }
 
-#myzfmlrntf .gt_empty_group_heading {
+#lirpqitlmw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -7490,15 +7369,15 @@ withdrawn for residential uses</th>
   vertical-align: middle;
 }
 
-#myzfmlrntf .gt_from_md > :first-child {
+#lirpqitlmw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#myzfmlrntf .gt_from_md > :last-child {
+#lirpqitlmw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#myzfmlrntf .gt_row {
+#lirpqitlmw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7517,7 +7396,7 @@ withdrawn for residential uses</th>
   overflow-x: hidden;
 }
 
-#myzfmlrntf .gt_stub {
+#lirpqitlmw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7530,7 +7409,7 @@ withdrawn for residential uses</th>
   padding-right: 5px;
 }
 
-#myzfmlrntf .gt_stub_row_group {
+#lirpqitlmw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7544,15 +7423,15 @@ withdrawn for residential uses</th>
   vertical-align: top;
 }
 
-#myzfmlrntf .gt_row_group_first td {
+#lirpqitlmw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#myzfmlrntf .gt_row_group_first th {
+#lirpqitlmw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#myzfmlrntf .gt_summary_row {
+#lirpqitlmw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7562,16 +7441,16 @@ withdrawn for residential uses</th>
   padding-right: 5px;
 }
 
-#myzfmlrntf .gt_first_summary_row {
+#lirpqitlmw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_first_summary_row.thick {
+#lirpqitlmw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#myzfmlrntf .gt_last_summary_row {
+#lirpqitlmw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7581,7 +7460,7 @@ withdrawn for residential uses</th>
   border-bottom-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_grand_summary_row {
+#lirpqitlmw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7591,7 +7470,7 @@ withdrawn for residential uses</th>
   padding-right: 5px;
 }
 
-#myzfmlrntf .gt_first_grand_summary_row {
+#lirpqitlmw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7601,7 +7480,7 @@ withdrawn for residential uses</th>
   border-top-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_last_grand_summary_row_top {
+#lirpqitlmw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7611,11 +7490,11 @@ withdrawn for residential uses</th>
   border-bottom-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_striped {
+#lirpqitlmw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#myzfmlrntf .gt_table_body {
+#lirpqitlmw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7624,7 +7503,7 @@ withdrawn for residential uses</th>
   border-bottom-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_footnotes {
+#lirpqitlmw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7638,7 +7517,7 @@ withdrawn for residential uses</th>
   border-right-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_footnote {
+#lirpqitlmw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -7647,7 +7526,7 @@ withdrawn for residential uses</th>
   padding-right: 5px;
 }
 
-#myzfmlrntf .gt_sourcenotes {
+#lirpqitlmw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7661,7 +7540,7 @@ withdrawn for residential uses</th>
   border-right-color: #D3D3D3;
 }
 
-#myzfmlrntf .gt_sourcenote {
+#lirpqitlmw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -7669,63 +7548,63 @@ withdrawn for residential uses</th>
   padding-right: 5px;
 }
 
-#myzfmlrntf .gt_left {
+#lirpqitlmw .gt_left {
   text-align: left;
 }
 
-#myzfmlrntf .gt_center {
+#lirpqitlmw .gt_center {
   text-align: center;
 }
 
-#myzfmlrntf .gt_right {
+#lirpqitlmw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#myzfmlrntf .gt_font_normal {
+#lirpqitlmw .gt_font_normal {
   font-weight: normal;
 }
 
-#myzfmlrntf .gt_font_bold {
+#lirpqitlmw .gt_font_bold {
   font-weight: bold;
 }
 
-#myzfmlrntf .gt_font_italic {
+#lirpqitlmw .gt_font_italic {
   font-style: italic;
 }
 
-#myzfmlrntf .gt_super {
+#lirpqitlmw .gt_super {
   font-size: 65%;
 }
 
-#myzfmlrntf .gt_footnote_marks {
+#lirpqitlmw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#myzfmlrntf .gt_asterisk {
+#lirpqitlmw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#myzfmlrntf .gt_indent_1 {
+#lirpqitlmw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#myzfmlrntf .gt_indent_2 {
+#lirpqitlmw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#myzfmlrntf .gt_indent_3 {
+#lirpqitlmw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#myzfmlrntf .gt_indent_4 {
+#lirpqitlmw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#myzfmlrntf .gt_indent_5 {
+#lirpqitlmw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -7834,8 +7713,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>The lowest average housing density, 1666 units per square mile, occurred in 2007. The highest average housing density, 1732 units per square mile, occurred in 2012. Housing density has decreased slightly from 2012 to 2020. 2020 has about the same average housing density as 2010.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Municipality =</span> <span class="fu">as.factor</span>(Municipality)) <span class="sc">%&gt;%</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Municipality) <span class="sc">%&gt;%</span></span>
@@ -7851,7 +7728,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"2000 - 2020 for Municipalities in Cook County, IL"</span>) <span class="sc">+</span></span>
 <span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>() <span class="sc">+</span></span>
 <span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_paletteer_d</span>(<span class="st">"nord::frost"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -7862,8 +7738,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>In Cook County, averaged across 2000 to 2020, as average housing units per square mile increase, average daily gallons of water per capita for residential uses decreases to a point. When housing units per square mile reach about 2,500, residential water use plateaus and begins to increase again around 3,500. This is to be expected. As noted in CMAP’s documentation, “As housing density increases…average water use per dwelling unit decreases; in part due to smaller lot sizes and less outdoor irrigation,” however, “small household sizes in higher density housing (counter-acting economies of scale in water use) and lack of individual meters in more dense housing” (“ON TO 2050 Regional Water Demand Forecast” 2018, 11).</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>housing_FSI_2020 <span class="sc">%&gt;%</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> units_per_sqmile,</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> FSI)) <span class="sc">+</span></span>
@@ -7875,7 +7749,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Cook County, IL, 2020"</span>) <span class="sc">+</span></span>
 <span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -7889,8 +7762,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 <section id="policy-recommendations" class="level1">
 <h1>Policy Recommendations</h1>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">units_per_sqmile =</span> <span class="fu">round</span>(units_per_sqmile, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
@@ -7913,26 +7784,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grand_summary_rows</span>(<span class="at">fns =</span> Average <span class="sc">~</span> <span class="fu">mean</span>(.)) <span class="sc">%&gt;%</span></span>
 <span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
 <span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">grand_summary_row.background.color =</span> <span class="st">"gray"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="oukgzqeyhj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#oukgzqeyhj table {
+<div id="ulsadjkndb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ulsadjkndb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oukgzqeyhj thead, #oukgzqeyhj tbody, #oukgzqeyhj tfoot, #oukgzqeyhj tr, #oukgzqeyhj td, #oukgzqeyhj th {
+#ulsadjkndb thead, #ulsadjkndb tbody, #ulsadjkndb tfoot, #ulsadjkndb tr, #ulsadjkndb td, #ulsadjkndb th {
   border-style: none;
 }
 
-#oukgzqeyhj p {
+#ulsadjkndb p {
   margin: 0;
   padding: 0;
 }
 
-#oukgzqeyhj .gt_table {
+#ulsadjkndb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -7958,12 +7828,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_caption {
+#ulsadjkndb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oukgzqeyhj .gt_title {
+#ulsadjkndb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -7975,7 +7845,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#oukgzqeyhj .gt_subtitle {
+#ulsadjkndb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -7987,7 +7857,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#oukgzqeyhj .gt_heading {
+#ulsadjkndb .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -7999,13 +7869,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_bottom_border {
+#ulsadjkndb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_col_headings {
+#ulsadjkndb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -8020,7 +7890,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_col_heading {
+#ulsadjkndb .gt_col_heading {
   color: #FFFFFF;
   background-color: #698B22;
   font-size: 100%;
@@ -8040,7 +7910,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#oukgzqeyhj .gt_column_spanner_outer {
+#ulsadjkndb .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #698B22;
   font-size: 100%;
@@ -8052,15 +7922,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#oukgzqeyhj .gt_column_spanner_outer:first-child {
+#ulsadjkndb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oukgzqeyhj .gt_column_spanner_outer:last-child {
+#ulsadjkndb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oukgzqeyhj .gt_column_spanner {
+#ulsadjkndb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -8072,11 +7942,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#oukgzqeyhj .gt_spanner_row {
+#ulsadjkndb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oukgzqeyhj .gt_group_heading {
+#ulsadjkndb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8102,7 +7972,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#oukgzqeyhj .gt_empty_group_heading {
+#ulsadjkndb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -8117,15 +7987,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#oukgzqeyhj .gt_from_md > :first-child {
+#ulsadjkndb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oukgzqeyhj .gt_from_md > :last-child {
+#ulsadjkndb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oukgzqeyhj .gt_row {
+#ulsadjkndb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8144,7 +8014,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#oukgzqeyhj .gt_stub {
+#ulsadjkndb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8157,7 +8027,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#oukgzqeyhj .gt_stub_row_group {
+#ulsadjkndb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8171,15 +8041,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#oukgzqeyhj .gt_row_group_first td {
+#ulsadjkndb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oukgzqeyhj .gt_row_group_first th {
+#ulsadjkndb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oukgzqeyhj .gt_summary_row {
+#ulsadjkndb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -8189,16 +8059,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#oukgzqeyhj .gt_first_summary_row {
+#ulsadjkndb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_first_summary_row.thick {
+#ulsadjkndb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oukgzqeyhj .gt_last_summary_row {
+#ulsadjkndb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8208,7 +8078,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_grand_summary_row {
+#ulsadjkndb .gt_grand_summary_row {
   color: #333333;
   background-color: #BEBEBE;
   text-transform: inherit;
@@ -8218,7 +8088,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#oukgzqeyhj .gt_first_grand_summary_row {
+#ulsadjkndb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8228,7 +8098,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_last_grand_summary_row_top {
+#ulsadjkndb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8238,11 +8108,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_striped {
+#ulsadjkndb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oukgzqeyhj .gt_table_body {
+#ulsadjkndb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -8251,7 +8121,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_footnotes {
+#ulsadjkndb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -8265,7 +8135,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_footnote {
+#ulsadjkndb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -8274,7 +8144,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#oukgzqeyhj .gt_sourcenotes {
+#ulsadjkndb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -8288,7 +8158,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#oukgzqeyhj .gt_sourcenote {
+#ulsadjkndb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -8296,63 +8166,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#oukgzqeyhj .gt_left {
+#ulsadjkndb .gt_left {
   text-align: left;
 }
 
-#oukgzqeyhj .gt_center {
+#ulsadjkndb .gt_center {
   text-align: center;
 }
 
-#oukgzqeyhj .gt_right {
+#ulsadjkndb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oukgzqeyhj .gt_font_normal {
+#ulsadjkndb .gt_font_normal {
   font-weight: normal;
 }
 
-#oukgzqeyhj .gt_font_bold {
+#ulsadjkndb .gt_font_bold {
   font-weight: bold;
 }
 
-#oukgzqeyhj .gt_font_italic {
+#ulsadjkndb .gt_font_italic {
   font-style: italic;
 }
 
-#oukgzqeyhj .gt_super {
+#ulsadjkndb .gt_super {
   font-size: 65%;
 }
 
-#oukgzqeyhj .gt_footnote_marks {
+#ulsadjkndb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oukgzqeyhj .gt_asterisk {
+#ulsadjkndb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oukgzqeyhj .gt_indent_1 {
+#ulsadjkndb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oukgzqeyhj .gt_indent_2 {
+#ulsadjkndb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oukgzqeyhj .gt_indent_3 {
+#ulsadjkndb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oukgzqeyhj .gt_indent_4 {
+#ulsadjkndb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oukgzqeyhj .gt_indent_5 {
+#ulsadjkndb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -8480,8 +8350,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>There are 108 municipalities in Cook County that had housing densities less than 2,500 housing units per square mile in 2020. This table illustrates those of the 108 that have the 10 highest residential water usage values. These are the top-priority communities that should revise their zoning ordinances to accommodate higher housing densities in anticipation both of lower water availability and higher demand for housing as people move into the region.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">units_per_sqmile =</span> <span class="fu">round</span>(units_per_sqmile, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
@@ -8503,26 +8371,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grand_summary_rows</span>(<span class="at">fns =</span> Average <span class="sc">~</span> <span class="fu">mean</span>(.)) <span class="sc">%&gt;%</span></span>
 <span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
 <span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">grand_summary_row.background.color =</span> <span class="st">"gray"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="sflehnqkka" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sflehnqkka table {
+<div id="tenoufpdlj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tenoufpdlj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sflehnqkka thead, #sflehnqkka tbody, #sflehnqkka tfoot, #sflehnqkka tr, #sflehnqkka td, #sflehnqkka th {
+#tenoufpdlj thead, #tenoufpdlj tbody, #tenoufpdlj tfoot, #tenoufpdlj tr, #tenoufpdlj td, #tenoufpdlj th {
   border-style: none;
 }
 
-#sflehnqkka p {
+#tenoufpdlj p {
   margin: 0;
   padding: 0;
 }
 
-#sflehnqkka .gt_table {
+#tenoufpdlj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -8548,12 +8415,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_caption {
+#tenoufpdlj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sflehnqkka .gt_title {
+#tenoufpdlj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -8565,7 +8432,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#sflehnqkka .gt_subtitle {
+#tenoufpdlj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -8577,7 +8444,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#sflehnqkka .gt_heading {
+#tenoufpdlj .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -8589,13 +8456,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_bottom_border {
+#tenoufpdlj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_col_headings {
+#tenoufpdlj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -8610,7 +8477,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_col_heading {
+#tenoufpdlj .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F9EA0;
   font-size: 100%;
@@ -8630,7 +8497,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#sflehnqkka .gt_column_spanner_outer {
+#tenoufpdlj .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F9EA0;
   font-size: 100%;
@@ -8642,15 +8509,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#sflehnqkka .gt_column_spanner_outer:first-child {
+#tenoufpdlj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sflehnqkka .gt_column_spanner_outer:last-child {
+#tenoufpdlj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sflehnqkka .gt_column_spanner {
+#tenoufpdlj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -8662,11 +8529,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#sflehnqkka .gt_spanner_row {
+#tenoufpdlj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sflehnqkka .gt_group_heading {
+#tenoufpdlj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8692,7 +8559,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#sflehnqkka .gt_empty_group_heading {
+#tenoufpdlj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -8707,15 +8574,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#sflehnqkka .gt_from_md > :first-child {
+#tenoufpdlj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sflehnqkka .gt_from_md > :last-child {
+#tenoufpdlj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sflehnqkka .gt_row {
+#tenoufpdlj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8734,7 +8601,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#sflehnqkka .gt_stub {
+#tenoufpdlj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8747,7 +8614,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#sflehnqkka .gt_stub_row_group {
+#tenoufpdlj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -8761,15 +8628,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#sflehnqkka .gt_row_group_first td {
+#tenoufpdlj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sflehnqkka .gt_row_group_first th {
+#tenoufpdlj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sflehnqkka .gt_summary_row {
+#tenoufpdlj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -8779,16 +8646,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#sflehnqkka .gt_first_summary_row {
+#tenoufpdlj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_first_summary_row.thick {
+#tenoufpdlj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sflehnqkka .gt_last_summary_row {
+#tenoufpdlj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8798,7 +8665,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_grand_summary_row {
+#tenoufpdlj .gt_grand_summary_row {
   color: #333333;
   background-color: #BEBEBE;
   text-transform: inherit;
@@ -8808,7 +8675,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#sflehnqkka .gt_first_grand_summary_row {
+#tenoufpdlj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8818,7 +8685,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_last_grand_summary_row_top {
+#tenoufpdlj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -8828,11 +8695,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_striped {
+#tenoufpdlj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sflehnqkka .gt_table_body {
+#tenoufpdlj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -8841,7 +8708,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_footnotes {
+#tenoufpdlj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -8855,7 +8722,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_footnote {
+#tenoufpdlj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -8864,7 +8731,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#sflehnqkka .gt_sourcenotes {
+#tenoufpdlj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -8878,7 +8745,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#sflehnqkka .gt_sourcenote {
+#tenoufpdlj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -8886,63 +8753,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#sflehnqkka .gt_left {
+#tenoufpdlj .gt_left {
   text-align: left;
 }
 
-#sflehnqkka .gt_center {
+#tenoufpdlj .gt_center {
   text-align: center;
 }
 
-#sflehnqkka .gt_right {
+#tenoufpdlj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sflehnqkka .gt_font_normal {
+#tenoufpdlj .gt_font_normal {
   font-weight: normal;
 }
 
-#sflehnqkka .gt_font_bold {
+#tenoufpdlj .gt_font_bold {
   font-weight: bold;
 }
 
-#sflehnqkka .gt_font_italic {
+#tenoufpdlj .gt_font_italic {
   font-style: italic;
 }
 
-#sflehnqkka .gt_super {
+#tenoufpdlj .gt_super {
   font-size: 65%;
 }
 
-#sflehnqkka .gt_footnote_marks {
+#tenoufpdlj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sflehnqkka .gt_asterisk {
+#tenoufpdlj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sflehnqkka .gt_indent_1 {
+#tenoufpdlj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sflehnqkka .gt_indent_2 {
+#tenoufpdlj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sflehnqkka .gt_indent_3 {
+#tenoufpdlj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sflehnqkka .gt_indent_4 {
+#tenoufpdlj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sflehnqkka .gt_indent_5 {
+#tenoufpdlj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -9069,8 +8936,6 @@ US Census Bureau, 2020 Decennial Census, table H1
 </div>
 <p>Regardless of density, above are the municipalities that must adopt plans for water conservation. Suburban Winnetka had the highest projected residential daily water usage for 2020. The list is nearly identical to the one for municipalities with densities less than 2,500 units per square mile (except for Chicago).</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cook_water_housingdensity <span class="sc">%&gt;%</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">units_per_sqmile =</span> <span class="fu">round</span>(units_per_sqmile, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
@@ -9092,26 +8957,25 @@ US Census Bureau, 2020 Decennial Census, table H1
 <span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grand_summary_rows</span>(<span class="at">fns =</span> Average <span class="sc">~</span> <span class="fu">mean</span>(.)) <span class="sc">%&gt;%</span></span>
 <span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
 <span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">grand_summary_row.background.color =</span> <span class="st">"gray"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
-<div id="yqtzvernkz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yqtzvernkz table {
+<div id="xaandzbpec" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xaandzbpec table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yqtzvernkz thead, #yqtzvernkz tbody, #yqtzvernkz tfoot, #yqtzvernkz tr, #yqtzvernkz td, #yqtzvernkz th {
+#xaandzbpec thead, #xaandzbpec tbody, #xaandzbpec tfoot, #xaandzbpec tr, #xaandzbpec td, #xaandzbpec th {
   border-style: none;
 }
 
-#yqtzvernkz p {
+#xaandzbpec p {
   margin: 0;
   padding: 0;
 }
 
-#yqtzvernkz .gt_table {
+#xaandzbpec .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -9137,12 +9001,12 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-left-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_caption {
+#xaandzbpec .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yqtzvernkz .gt_title {
+#xaandzbpec .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -9154,7 +9018,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-width: 0;
 }
 
-#yqtzvernkz .gt_subtitle {
+#xaandzbpec .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -9166,7 +9030,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-width: 0;
 }
 
-#yqtzvernkz .gt_heading {
+#xaandzbpec .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -9178,13 +9042,13 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_bottom_border {
+#xaandzbpec .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_col_headings {
+#xaandzbpec .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -9199,7 +9063,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_col_heading {
+#xaandzbpec .gt_col_heading {
   color: #FFFFFF;
   background-color: #CD6839;
   font-size: 100%;
@@ -9219,7 +9083,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#yqtzvernkz .gt_column_spanner_outer {
+#xaandzbpec .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #CD6839;
   font-size: 100%;
@@ -9231,15 +9095,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 4px;
 }
 
-#yqtzvernkz .gt_column_spanner_outer:first-child {
+#xaandzbpec .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yqtzvernkz .gt_column_spanner_outer:last-child {
+#xaandzbpec .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yqtzvernkz .gt_column_spanner {
+#xaandzbpec .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -9251,11 +9115,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   width: 100%;
 }
 
-#yqtzvernkz .gt_spanner_row {
+#xaandzbpec .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yqtzvernkz .gt_group_heading {
+#xaandzbpec .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9281,7 +9145,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   text-align: left;
 }
 
-#yqtzvernkz .gt_empty_group_heading {
+#xaandzbpec .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -9296,15 +9160,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: middle;
 }
 
-#yqtzvernkz .gt_from_md > :first-child {
+#xaandzbpec .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yqtzvernkz .gt_from_md > :last-child {
+#xaandzbpec .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yqtzvernkz .gt_row {
+#xaandzbpec .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9323,7 +9187,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   overflow-x: hidden;
 }
 
-#yqtzvernkz .gt_stub {
+#xaandzbpec .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9336,7 +9200,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#yqtzvernkz .gt_stub_row_group {
+#xaandzbpec .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9350,15 +9214,15 @@ US Census Bureau, 2020 Decennial Census, table H1
   vertical-align: top;
 }
 
-#yqtzvernkz .gt_row_group_first td {
+#xaandzbpec .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yqtzvernkz .gt_row_group_first th {
+#xaandzbpec .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yqtzvernkz .gt_summary_row {
+#xaandzbpec .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -9368,16 +9232,16 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#yqtzvernkz .gt_first_summary_row {
+#xaandzbpec .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_first_summary_row.thick {
+#xaandzbpec .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yqtzvernkz .gt_last_summary_row {
+#xaandzbpec .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9387,7 +9251,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_grand_summary_row {
+#xaandzbpec .gt_grand_summary_row {
   color: #333333;
   background-color: #BEBEBE;
   text-transform: inherit;
@@ -9397,7 +9261,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#yqtzvernkz .gt_first_grand_summary_row {
+#xaandzbpec .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9407,7 +9271,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-top-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_last_grand_summary_row_top {
+#xaandzbpec .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9417,11 +9281,11 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_striped {
+#xaandzbpec .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yqtzvernkz .gt_table_body {
+#xaandzbpec .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -9430,7 +9294,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-bottom-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_footnotes {
+#xaandzbpec .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9444,7 +9308,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_footnote {
+#xaandzbpec .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -9453,7 +9317,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#yqtzvernkz .gt_sourcenotes {
+#xaandzbpec .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9467,7 +9331,7 @@ US Census Bureau, 2020 Decennial Census, table H1
   border-right-color: #D3D3D3;
 }
 
-#yqtzvernkz .gt_sourcenote {
+#xaandzbpec .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -9475,63 +9339,63 @@ US Census Bureau, 2020 Decennial Census, table H1
   padding-right: 5px;
 }
 
-#yqtzvernkz .gt_left {
+#xaandzbpec .gt_left {
   text-align: left;
 }
 
-#yqtzvernkz .gt_center {
+#xaandzbpec .gt_center {
   text-align: center;
 }
 
-#yqtzvernkz .gt_right {
+#xaandzbpec .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yqtzvernkz .gt_font_normal {
+#xaandzbpec .gt_font_normal {
   font-weight: normal;
 }
 
-#yqtzvernkz .gt_font_bold {
+#xaandzbpec .gt_font_bold {
   font-weight: bold;
 }
 
-#yqtzvernkz .gt_font_italic {
+#xaandzbpec .gt_font_italic {
   font-style: italic;
 }
 
-#yqtzvernkz .gt_super {
+#xaandzbpec .gt_super {
   font-size: 65%;
 }
 
-#yqtzvernkz .gt_footnote_marks {
+#xaandzbpec .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yqtzvernkz .gt_asterisk {
+#xaandzbpec .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yqtzvernkz .gt_indent_1 {
+#xaandzbpec .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yqtzvernkz .gt_indent_2 {
+#xaandzbpec .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yqtzvernkz .gt_indent_3 {
+#xaandzbpec .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yqtzvernkz .gt_indent_4 {
+#xaandzbpec .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yqtzvernkz .gt_indent_5 {
+#xaandzbpec .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -9673,7 +9537,7 @@ US Census Bureau, 2020 Decennial Census, table H1
 <p>“Regional Flood Susceptibility Index.” Chicago Metropolitan Agency for Planning. Accessed November 20, 2023.<a href="https://www.cmap.illinois.gov/programs/water/stormwater/flood-index" class="uri">https://www.cmap.illinois.gov/programs/water/stormwater/flood-index</a>.</p>
 <p>Cotto, Jennifer. 2022. “Cook County Desirable Destination Amid Climate Change Study Says.” WTTW, June 8, 2022.<a href="https://news.wttw.com/2022/06/08/cook-county-desirable-destination-amid-climate-change-study-says" class="uri">https://news.wttw.com/2022/06/08/cook-county-desirable-destination-amid-climate-change-study-says</a>.</p>
 <p>Dieter, Cheryl, and Molly Maupin. 2017. “Public Supply and Domestic Water Use in the United States, 2015.” Open-File Report. Open-File Report.</p>
-<p>Egan, Dan. 2021. “A Battle Between a Great City and a Great Lake.” The New York Times, July 8, 2021, sec.&nbsp;Climate.<a href="https://www.nytimes.com/interactive/2021/07/07/climate/chicago-river-lake-michigan.html" class="uri">https://www.nytimes.com/interactive/2021/07/07/climate/chicago-river-lake-michigan.html</a>.</p>
+<p>Egan, Dan. 2021. “A Battle Between a Great City and a Great Lake.” The New York Times, July 8, 2021, sec. Climate.<a href="https://www.nytimes.com/interactive/2021/07/07/climate/chicago-river-lake-michigan.html" class="uri">https://www.nytimes.com/interactive/2021/07/07/climate/chicago-river-lake-michigan.html</a>.</p>
 <p>“On to 2050 Regional Water Demand Forecast for Northeastern Illinois, 2015-2050.” 2018. Chicago Metropolitan Agency for Planning.<a href="https://www.cmap.illinois.gov/documents/10180/402130/Water+Demand+Report_Final.pdf/ab2e5395-672a-7a6d-d3e0-598c1819fc5a?t=1545877243281" class="uri">https://www.cmap.illinois.gov/documents/10180/402130/Water+Demand+Report_Final.pdf/ab2e5395-672a-7a6d-d3e0-598c1819fc5a?t=1545877243281</a>.</p>
 <p>Sampson, David A., Ray Quay, and Mitch Horrie. 2022. “Building Type, Housing Density, and Water Use: Denver Water Data and Agent-Based Simulations.” JAWRA Journal of the American Water Resources Association 58 (3): 355–69.<a href="https://doi.org/10.1111/1752-1688.13009" class="uri">https://doi.org/10.1111/1752-1688.13009</a>.</p>
 <p>Sanchez, G. M., J. W. Smith, A. Terando, G. Sun, and R. K. Meentemeyer. 2018. “Spatial Patterns of Development Drive Water Use.” Water Resources Research 54 (3): 1633–49.<a href="https://doi.org/10.1002/2017WR021730" class="uri">https://doi.org/10.1002/2017WR021730</a>.</p>
